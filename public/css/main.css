@@ -1,0 +1,179 @@
+:root {
+    --primary-color: #ffd53e;
+    --secondary-color: #ffe94e;
+    --tertiary1-color: #52b788;
+    --tertiary2-color: #ffaaea;
+    --yellow1-color: #fdbe39;
+    --yellow2-color: #fecf3e;
+    --yellow4-color: #ffda3d;
+    --yellow5-color: #ffe246;
+    --yellow7-color: #fff056;
+    --yellow8-color: #fff75e;
+    --green1-color: #1b4332;
+    --green2-color: #2d6a4f;
+    --green3-color: #40916c;
+    --green5-color: #74c69d;
+    --green6-color: #95d5b2;
+    --green7-color: #b7e4c7;
+    --green8-color: #d8f3dc;
+    --warning-color: #f64c4c;
+    --success-color: #47b881;
+    --info-color: #3b82f6;
+    --neutral700-color: #1f1f1f;
+    --neutral600-color: #4b4b4b;
+    --neutral500-color: #8e8e8e;
+    --neutral400-color: #cacaca;
+    --neutral300-color: #e1e1e1;
+    --neutral200-color: #eeeeee;
+    --neutral100-color: #f5f5f5;
+    --white-color: #fff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Poppins, Arial;
+    margin: 0;
+    padding: 0;
+}
+
+/* Text Colors */
+.txt-fff {
+    color: #fff;
+}
+
+.txt-prim {
+    color: var(--primary-color);
+}
+
+.txt-sec {
+    color: var(--secondary-color);
+}
+
+.txt-ter1 {
+    color: var(--tertiary1-color);
+}
+
+.txt-ter2 {
+    color: var(--tertiary2-color);
+}
+/* End Text Colors */
+
+/* BG Colors */
+.bg-fff {
+    background-color: #fff;
+}
+
+.bg-prim {
+    background-color: var(--primary-color);
+}
+
+.bg-sec {
+    background-color: var(--secondary-color);
+}
+
+.bg-ter1 {
+    background-color: var(--tertiary1-color);
+}
+
+.bg-ter2 {
+    background-color: var(--tertiary2-color);
+}
+/* End BG Colors */
+
+/* Fonts */
+
+.fsize-1 {
+    font-size: 13px;
+    line-height: 20px;
+}
+
+.fsize-2 {
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.fsize-3 {
+    font-size: 14px;
+    line-height: 21px;
+}
+
+.fsize-4 {
+    font-size: 14px;
+    line-height: 21px;
+}
+
+.fsize-5 {
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.fsize-6 {
+    font-size: 18px;
+    line-height: 27px;
+}
+
+.fsize-7 {
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.fsize-8 {
+    font-size: 24px;
+    line-height: 24px;
+}
+
+.fsize-9 {
+    font-size: 28px;
+    line-height: 28px;
+}
+
+.fsize-10 {
+    font-size: 32px;
+    line-height: 32px;
+}
+
+.fsize-11 {
+    font-size: 42px;
+    line-height: 42px;
+}
+
+.fweig-reg {
+    font-weight: 400;
+}
+
+.fweig-semibold {
+    font-weight: 500;
+}
+
+.fweig-bold {
+    font-weight: 700;
+}
+
+a {
+    color: var(--tertiary1-color);
+}
+/* End Fonts */
+
+/* Border */
+.bd-fff {
+    border: 1px solid #fff;
+}
+
+.bd-prim {
+    border: 1px solid var(--primary-color);
+}
+
+.bd-sec {
+    border: 1px solid var(--secondary-color);
+}
+
+.bd-ter1 {
+    border: 1px solid var(--tertiary1-color);
+}
+
+.bd-ter2 {
+    border: 1px solid var(--tertiary2-color);
+}
