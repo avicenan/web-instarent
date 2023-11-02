@@ -59,6 +59,14 @@ body {
 .txt-ter2 {
     color: var(--tertiary2-color);
 }
+
+.txt-ntrl300 {
+    color: var(--neutral300-color);
+}
+
+.txt-ntrl500 {
+    color: var(--neutral500-color);
+}
 /* End Text Colors */
 
 /* BG Colors */
@@ -80,6 +88,14 @@ body {
 
 .bg-ter2 {
     background-color: var(--tertiary2-color);
+}
+
+.bg-yellow8 {
+    background-color: var(--yellow8-color);
+}
+
+.bg-green7 {
+    background-color: var(--green7-color);
 }
 /* End BG Colors */
 
@@ -140,12 +156,21 @@ body {
     line-height: 42px;
 }
 
+.fsize-12 {
+    font-size: 55px;
+    line-height: 70px;
+}
+
 .fweig-reg {
     font-weight: 400;
 }
 
 .fweig-semibold {
     font-weight: 500;
+}
+
+.fweig-medium {
+    font-weight: 600;
 }
 
 .fweig-bold {
@@ -176,4 +201,10 @@ a {
 
 .bd-ter2 {
     border: 1px solid var(--tertiary2-color);
+}
+
+@media (max-width: 1000px) {
+    .main-navbar {
+        background-color: rgba(255, 255, 255, 0.8);
+    }
 }
