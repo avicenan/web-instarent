@@ -1,8 +1,12 @@
 @extends('layouts.entry')
 
 @section('form-container')
+{{-- Title start --}}
     <h1 class="fsize-11 fweig-bold">Masuk</h1>
     <p>Belum punya akun? <span><a href="#">Buat</a></span></p>
+{{-- Title end --}}
+
+{{-- Form start --}}
     <div class="container mt-5 ps-0">
         <form action="">
             <div class="row mb-4">
@@ -46,6 +50,8 @@
             </div>
         </form>
     </div>
+{{-- Form end --}}
+
     <a href="/">to register</a>
     <a href="/home">to home</a>
 @endsection

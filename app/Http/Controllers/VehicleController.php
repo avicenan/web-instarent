@@ -3,64 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vehicle;
+use App\Models\Brand;
 use App\Http\Requests\StoreVehicleRequest;
 use App\Http\Requests\UpdateVehicleRequest;
+use App\Models\Category;
 
 class VehicleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return view('vehicles', [
+            "title" => "Katalog",
+            "active" => "vehicles",
+            "vehicles" => Vehicle::latest()->filter(request(['search', 'brand', 'category', 'start_date', 'end_date']))->paginate(4)->withQueryString(),
+            "brands" => Brand::all(),
+            "categories" => Category::all()
+        ]);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreVehicleRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(Vehicle $vehicle)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Vehicle $vehicle)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateVehicleRequest $request, Vehicle $vehicle)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Vehicle $vehicle)
-    {
-        //
+        return view('vehicle', [
+            "title" => "Vehicle Details",
+            "active" => "vehicles",
+            "vehicle" => $vehicle,
+            "vehicles" => Vehicle::all()
+        ]);
     }
 }

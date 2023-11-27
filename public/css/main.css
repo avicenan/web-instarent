@@ -177,6 +177,10 @@ body {
     font-weight: 700;
 }
 
+.fweig-xbold {
+    font-weight: 900;
+}
+
 a {
     color: var(--tertiary1-color);
 }

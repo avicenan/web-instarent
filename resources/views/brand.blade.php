@@ -2,7 +2,7 @@
 
 @section('container')
 {{-- Hero start --}}
-    <div class="container-fluid mb-2" style="padding: 0 10%; padding-top:7%;">
+    <div class="container-fluid mb-5" style="padding: 0 10%; padding-top:7%;">
         <div class="hero p-5 row" style="border-radius: 30px;
         background: linear-gradient(180deg, #FFD53E 35%, #AFC760 58.44%, hsl(152, 41%, 52%) 100%);">
             <div class="col-md-6">
@@ -17,56 +17,15 @@
 {{-- Hero end --}}
 
 {{-- Search start --}}
-    <nav class="navbar" style="padding: 3% 10%;" >
-        <div class="container p-4 bg-danger rounded">
-          <form class="col-12 vehicle-type" action="/vehicles">
-            <ul class="nav nav-tabs justify-content-around mb-3">
-              @foreach ($categories as $category)
-                <li class="nav-item bg-white rounded-top flex-fill text-center mx-1">
-                  @if (request('brand'))
-                    <a class="nav-link text-dark" href="/vehicles?brand={{ request('brand') }}&category={{ $category->slug }}">{{ $category->name }}</a>
-                  @else
-                    <a class="nav-link text-dark" href="/vehicles?category={{ $category->slug }}">{{ $category->name }}</a>
-                  @endif
-                </li>
-              @endforeach
-            </ul>
+    <nav class="navbar mb-5" style="padding: 0 10%;" >
+        <div class="container-fluid">
+          <form class="d-flex col-12" role="search">
+            <input class="form-control me-2 p-4" type="search" placeholder="Temukan kendaraan impian Anda bersama Kami!" aria-label="Search">
+            <span class="material-symbols-outlined position-absolute p-4" style="right:13%">
+                search
+                <button style="position:absolute; right:30%; opacity:0;">search</button>
+            </span>
           </form>
-          <form class="col-12" role="search" action="/vehicles">
-            @if (request('brand'))
-              <input type="hidden" name="brand" value="{{ request('brand') }}">
-            @endif
-            @if (request('category'))
-              <input type="hidden" name="category" value="{{ request('category') }}">
-            @endif
-            <div class="input-group mb-2 d-flex">
-              <div class="flex-fill me-1">
-                <label for="start_date" class="text-white mb-1 fweig-semibold">Start Date</label>
-                <input class="form-control me-1 p-4" name="start_date" type="date" value="{{ request('start_date') }}">
-              </div>
-              <div class="flex-fill ms-1">
-                <label for="end_date" class="text-white mb-1 fweig-semibold">End Date</label>
-                <input class="form-control p-4" name="end_date" type="date" value="{{ request('end_date') }}"> 
-              </div>
-            </div>
-            <div class="input-group position-relative">
-              <input class="form-control p-4 rounded" name="search" type="search" placeholder="Temukan kendaraan impian Anda bersama Kami!" aria-label="Search" value="{{ request('search') }}">
-              <span class="material-symbols-outlined position-absolute p-4" style="right:3%">
-                  search
-                  <button style="position:absolute; right:30%; opacity:0;" type="submit">search</button>
-              </span>
-            </div>
-          </form>
-        </div>
-        <div class="brands p-4 d-flex flex-wrap">
-           <div class="brand py-2 px-3 bg-green7 rounded mx-2 my-1">
-            <a href="/vehicles" class="text-decoration-none text-dark">All</a>
-           </div>
-          @foreach ($brands as $brand)
-            <div class="brand py-2 px-3 bg-green7 rounded mx-2 my-1">
-              <a href="/vehicles?brand={{ $brand->slug }}" class="text-decoration-none text-dark">{{ $brand->name }}</a>
-            </div>
-          @endforeach
         </div>
     </nav>
 {{-- Search end --}}
@@ -74,6 +33,7 @@
 {{-- Cards start --}}
     <div class="container-fluid" style="padding: 0 10%">
       <div class="row justify-between">
+        <h1 class="mb-5">Vehicle Brand : {{ $brand }}</h1>
       @foreach ($vehicles as $vehicle)
         <div class="col-md-3 mb-3 position-relative">
           <a href="/vehicles/{{ $vehicle->slug }}" class="text-decoration-none">
@@ -131,15 +91,6 @@
       @endforeach
     </div>
 {{-- Cards end --}}
-
-    {{-- @else
-      <p class="text-center fs-4">No vehicle available.</p>
-    @endif --}}
-
-
-    <div class="d-flex justify-content-center">
-      {{ $vehicles->links() }}
-    </div>
 
 
     <a href="/home" class="my-auto">to home</a>
