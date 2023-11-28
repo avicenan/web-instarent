@@ -17,10 +17,16 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
+    // protected $fillable = [
+    //     'fname',
+    //     'lname',
+
+    //     'email',
+    //     'password',
+    // ];
+
+    protected $guarded = [
+        'id'
     ];
 
     /**
@@ -41,6 +47,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'password_confirmation' => 'hashed'
     ];
 
     public function rent()

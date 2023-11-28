@@ -21,17 +21,38 @@
           <li class="nav-item">
           </li>
         </ul>
-        <ul class="navbar-nav">
+        <ul class="navbar-nav auth-button">
+          @auth
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Welcome back,
+              <span class="fweig-bold">
+                 {{ auth()->user()->fname }} {{ auth()->user()->lname }}
+              </span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/profile"><i class="bi bi-person-fill"></i> Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <form action="/logout" method="post">
+                  @csrf
+                  <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right"></i> Logout</button>
+                </form>
+              </li>
+            </ul>
+          </li>
+          @else
           <li class="nav-items">
-            <form class="d-flex" role="search">
+            <div class="d-flex" role="search">
               <a href="/login">
                 <button class="btn btn-outline-success btn-light px-5 py-2 me-2" type="button"><i class="bi bi-box-arrow-in-right"></i> Masuk</button>
               </a>
               <a href="/register">
                 <button class="btn btn-outline-success btn-success text-white px-5 py-2 ms-2" type="button">Daftar</button>
               </a>
-          </form>
+            </div>
           </li>
+          @endauth
         </ul>
       </div>
     </div>

@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Models\Brand;
 use App\Models\Vehicle;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\LoginController;
 
-use App\Models\Brand;
+use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,29 +28,17 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/home', function () {
-    return view('home', [
-        "title" => "Beranda",
-        "active" => "home",
-        "vehicles" => Vehicle::all()
-    ]);
-});
+Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 
-Route::get('/register', function () {
-    return view('register', [
-        "title" => "Daftar",
-        "active" => "register",
-    ]);
-});
+Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/login', function () {
-    return view('login', [
-        "title" => "Masuk",
-        "active" => "login",
-    ]);
-});
+Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
 
-Route::get('/login', [LoginController::class, 'index']);
+Route::post('/login', [LoginController::class, 'authenticate']);
+
+Route::post('/logout', [LoginController::class, 'logout']);
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
 Route::get('/vehicles', [VehicleController::class, 'index']);
 
