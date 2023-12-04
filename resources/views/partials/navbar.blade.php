@@ -10,14 +10,18 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link {{ ($active === "vehicles") ? 'active' : '' }}" href="/vehicles">Katalog</a>
+            <a class="nav-link {{ Request::is('vehicles') ? 'active' : '' }}" href="/vehicles">Katalog</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ ($active === "about") ? 'active' : '' }}" href="/favorite">Favorit</a>
+            <a class="nav-link {{ Request::is('favorite') ? 'active' : '' }}" href="/favorite">Favorit</a>
           </li>
           <li class="nav-item me-2">
-            <a class="nav-link {{ ($active === "reservation") ? 'active' : '' }}" href="/reservation">Reservasi</a>
+            <a class="nav-link {{ Request::is('rent') ? 'active' : '' }}" href="/rent">Reservasi</a>
           </li>
+          @auth<li class="nav-item me-2">
+            <a class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}" href="/dashboard">Administrator</a>
+          </li>
+          @endauth
           <li class="nav-item">
           </li>
         </ul>
