@@ -2,8 +2,9 @@
 
 @section('container')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-  <h1 class="h2">My Vehicles</h1>
+  <h1 class="h2">Pengajuan Sewa</h1>
 </div>
+
 
 <div class="table-responsive col-lg-8">
     <table class="table table-striped table-sm">
@@ -20,22 +21,16 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($vehicles as $vehicle)
         <tr>
-            <td>{{ $loop->iteration }}</td>
-            <td>{{ $vehicle->title }}</td>
-            <td>Ini nomor plat</td>
-            <td>{{ $vehicle->brand->name}}</td>
-            <td>{{ $vehicle->type->name }}</td>
-            <td>warna</td>
-            <td>{{ $vehicle->price }}</td>
-            <td>
-                <a href="/dashboard/vehicles/{{ $vehicle->slug }}" class="badge bg-info"><i data-feather="eye"></i></a>
-                <a href="#" class="badge bg-warning"><i data-feather="edit"></i></a>
-                <a href="#" class="badge bg-danger"><i data-feather="x-circle"></i></a>
-            </td>
+            <td>placeholder</td>
+            <td>placeholder</td>
+            <td>placeholder</td>
+            <td>placeholder</td>
+            <td>placeholder</td>
+            <td>placeholder</td>
+            <td>placeholder</td>
+            <td>placeholder</td>
         </tr>
-        @endforeach
       </tbody>
     </table>
 </div>

@@ -8,6 +8,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardVehicleController;
+use App\Http\Controllers\DashboardRentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,3 +72,5 @@ Route::get('/rent', function() {
 });
 
 Route::resource('/dashboard/vehicles', DashboardVehicleController::class)->middleware('auth');
+
+Route::resource('/dashboard/rents', DashboardRentController::class)->middleware('auth');
