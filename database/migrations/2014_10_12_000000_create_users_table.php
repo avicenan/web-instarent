@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('telpNum');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('usertype')->nullable();
             $table->timestamps();
         });
     }

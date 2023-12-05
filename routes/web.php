@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
 use App\Models\Brand;
 use App\Models\Vehicle;
 use Illuminate\Support\Facades\Route;
@@ -8,6 +7,7 @@ use App\Http\Controllers\LoginController;
 
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\DashboardVehicleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +38,9 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 
 Route::post('/logout', [LoginController::class, 'logout']);
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+Route::get('/dashboard', function() {
+    return view('dashboard.index');
+})->middleware('auth');
 
 Route::get('/vehicles', [VehicleController::class, 'index']);
 
@@ -67,3 +69,5 @@ Route::get('/rent', function() {
         'active' => 'vehicles',
     ]);
 });
+
+Route::resource('/dashboard/vehicles', DashboardVehicleController::class)->middleware('auth');
