@@ -207,6 +207,25 @@ a {
     border: 1px solid var(--tertiary2-color);
 }
 
+.feather-16 {
+    width: 16px;
+    height: 16px;
+}
+
+.feather-24 {
+    width: 24px;
+    height: 24px;
+}
+
+.feather-32 {
+    width: 32px;
+    height: 32px;
+}
+
+.toggle:hover {
+    cursor: pointer;
+}
+
 @media (max-width: 1000px) {
     .main-navbar {
         background-color: rgba(255, 255, 255, 0.8);

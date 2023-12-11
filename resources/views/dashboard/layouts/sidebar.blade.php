@@ -15,7 +15,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ Request::is('dashboard/vehicles') ? 'active' : '' }}" href="/dashboard/vehicles">
+        <a class="nav-link {{ Request::is('dashboard/vehicles*') ? 'active' : '' }}" href="/dashboard/vehicles">
           <i data-feather="truck"></i>
           Kendaraan
         </a>

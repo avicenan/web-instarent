@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->unique();
+            $table->string('title');
             $table->foreignId('category_id');
             $table->foreignId('brand_id');
             $table->foreignId('type_id');
@@ -22,7 +22,9 @@ return new class extends Migration
             $table->integer('capacity');
             $table->integer('power');
             $table->integer('price');
-            $table->date('start_date');
+            $table->string('plate_num')->unique();
+            $table->string('color');
+            $table->string('extras')->nullable();
             $table->timestamps();
         });
     }

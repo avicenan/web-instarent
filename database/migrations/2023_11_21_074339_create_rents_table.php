@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('vehicle_id');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->datetime('start_date', 0);
+            $table->datetime('end_date', 0);
             $table->string('status')->default('Booked');
             $table->string('payment_status')->default('Unpaid');
             $table->timestamps();

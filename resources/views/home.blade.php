@@ -1,27 +1,30 @@
 @extends('layouts.main')
 
-@section('container')
 {{-- Hero start --}}
-    <div class="hero bg-prim" style="max-height: 536px; z-index:-99; mt-0">
-        <div class="hero-items">
-            <div class="container-fluid" style="padding: 7% 10%">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <h1 class="text-white fw-bold fsize-12 mb-5">Best Place to<br>Rented a Dream<br>Vechicles</h1>
-                        <h2 class="text-white fw-bold fs-6 lh-base" >Tidak perlu mencari lebih jauh, InstaRent adalah tempat terbaik untuk menyewa kendaraan impian Anda</h2>
+<div class="hero bg-prim row justify-content-center" style="max-height: 536px; z-index:-99; mt-0">
+    <div class="col-8" style="margin-top: 6rem;">
+      <div class="hero-items">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h4 class="text-white fw-bold fsize-10 mb-5">Best Place to<br>Rented a Dream<br>Vechicles</h4>
+                    <h5 class="text-white fw-bold fsize-8 lh-base" >Tidak perlu mencari lebih jauh, InstaRent adalah tempat terbaik untuk menyewa kendaraan impian Anda</h5>
+                </div>
+                <div class="col-lg-8 text-center position-relative">
+                    <div class="card position-absolute" style="height: 180px; width:180px; left:50px; border-radius: 30px;
+                    background: var(--White, #FFF);" hidden>
                     </div>
-                    <div class="col-lg-8 text-center position-relative">
-                        <div class="card position-absolute" style="height: 180px; width:180px; left:50px; border-radius: 30px;
-                        background: var(--White, #FFF);">
-                        </div>
-                        <img src="/img/home-hero-car.png" class="mt-5 img-fluid" alt="">
-                    </div>
+                    <img src="/img/home-hero-car.png" class="mt-5 img-fluid" alt="">
                 </div>
             </div>
         </div>
     </div>
-    <div class="hero bg-yellow8" style="height: 137px"></div>
-    {{-- Hero end --}}
+  </div>
+</div>
+<div class="hero bg-yellow8" style="height: 137px"></div>
+{{-- Hero end --}}
+
+@section('container')
 
     {{-- Brand start --}}
     <div class="brand inline">
@@ -39,7 +42,7 @@
     {{-- Brand end --}}
 
     {{-- Catalog start --}}
-    <div class="container-fluid mb-5" id="catalog" style="padding: 0 10%" >
+    {{-- <div class="container-fluid mb-5" id="catalog" style="padding: 0 10%" >
         <h1 class="fw-bold fs-4">Katalog</h1>
         <div class="row justify-between">
           @foreach ($vehicles as $vehicle)
@@ -98,11 +101,11 @@
           </div>
           @endforeach
         </div>
-    </div>
+    </div> --}}
     {{-- Catalog end --}}
 
     {{-- Benefits start --}}
-    <div class="container-fluid mb-5 bg-green7" id="benefits" style="padding: 0 10%; min-height:500px" >
+    <div class="container-fluid mb-5 bg-green7 mx-auto" id="benefits" style="min-height:500px" >
       <div class="row">
           <div class="col">foto</div>
           <div class="col">benefit</div>
@@ -111,7 +114,7 @@
     {{-- Benefits end --}}
 
     {{-- Steps start --}}
-    <div class="container-fluid mb-5 text-center" id="howTo" style="padding: 0 10%">
+    <div class="container-fluid mb-5 text-center" id="howTo">
       <h1 class="fs-4 fw-bold mb-5">Cara Melakukan Pembayaran</h1>
       <div class="row">
         <div class="col-md-2">

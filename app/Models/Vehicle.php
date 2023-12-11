@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Cviebrock\EloquentSluggable\Sluggable;
+
 class Vehicle extends Model
 {
-    use HasFactory;
+    use HasFactory, Sluggable;
 
     protected $guarded = ['id'];
 
@@ -29,25 +31,42 @@ class Vehicle extends Model
             });
         });
 
-        $query->when($filters['start_date'] ?? false, function($query, $form_start_date) {
-            return $query->whereNotIn('id', function($query) use ($form_start_date) {
+        // $query->when($filters['start_date'] ?? false, function($query, $form_start_date) {
+        //     return $query->whereNotIn('id', function($query) use ($form_start_date) {
+        //         $query->from('rents')
+        //         ->select('vehicle_id')
+        //         ->where('start_date', '<=', $form_start_date)
+        //         ->where('end_date', '>=', $form_start_date);
+        //     });
+        // });
+
+        $query->when(($filters['start_date'] ?? false) || ($filters['end_date'] ?? false) , function($query) use ($filters) {
+            $form_start_date =  $filters['start_date'];
+            $form_end_date = $filters['end_date'];
+            return $query->whereNotIn('id', function($query) use ($form_start_date, $form_end_date) {
                 $query->from('rents')
                 ->select('vehicle_id')
-                ->where('start_date', '<=', $form_start_date)
-                ->where('end_date', '>=', $form_start_date);
+                ->where('start_date', '<', $form_end_date)
+                ->where('end_date', '>', $form_start_date);
             });
         });
 
-        $query->when($filters['end_date'] ?? false, function($query, $form_end_date) {
-            return $query->whereNotIn('id', function($query) use ($form_end_date) {
-                $query->from('rents')
-                ->select('vehicle_id')
-                ->where('start_date', '<=', $form_end_date)
-                ->where('end_date', '>=', $form_end_date);
-            });
-        });
+        // if (isset($filters['start_date']) && isset($filters['end_date'])) {
+        //     $form_start_date = $filters['start_date'];
+        //     $form_end_date = $filters['end_date'];
+        //     $query->whereNotIn('id', function($query) use ($form_end_date, $form_start_date) {
+        //         $query->from('rents')
+        //             ->select('vehicle_id')
+        //             ->where('start_date', '<=', $form_start_date)
+        //             ->where('end_date', '>=', $form_start_date)
+        //             ->where('start_date', '<=', $form_end_date)
+        //             ->where('end_date', '>=', $form_end_date)
+        //             ->when('start_date' <= $form_start_date, function())
+                    
 
-        
+        //     });
+        // }
+
 
     }
 
@@ -74,6 +93,15 @@ class Vehicle extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => ['title', 'plate_num']
+            ]
+        ];
     }
 
 }

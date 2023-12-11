@@ -16,10 +16,13 @@
 
         {{-- Google Material Icons --}}
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        
+        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+        
         <style>
             .material-symbols-outlined {
               font-variation-settings:
-              'FILL' 100,
+              'FILL' 0,
               'wght' 400,
               'GRAD' 0,
               'opsz' 24
@@ -35,9 +38,16 @@
 
         @include('partials.navbar')
 
-            <div class="page-container">
+        <div class="row justify-content-center">
+            <div class="page-container col-lg-10" style="padding: 0 5%; max-width: 1650px">
                 @yield('container')
             </div>
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+            
+        <script>
+            feather.replace();
+        </script>
+    
     </body>
 </html>

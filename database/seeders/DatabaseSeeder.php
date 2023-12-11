@@ -18,6 +18,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        User::create([
+            'fname' => 'Admin',
+            'lname' => 'Andri',
+            'telpNum' => '082100001111',
+            'email' => 'admin@email.com',
+            'password' => '12345678',
+            'usertype' => 'admin'
+        ]);
+        
         // Brand
 
         Brand::create([
@@ -82,11 +91,31 @@ class DatabaseSeeder extends Seeder
             'slug' => 'bike'
         ]);
 
-        // Type
+        // Type ################################
 
         Type::create([
             'name' => 'Sedan',
             'slug' => 'sedan'
+        ]);
+
+        Type::create([
+            'name' => 'Hatchback',
+            'slug' => 'hatchback'
+        ]);
+
+        Type::create([
+            'name' => 'Cabriolet',
+            'slug' => 'cabriolet'
+        ]);
+
+        Type::create([
+            'name' => 'Muscle',
+            'slug' => 'muscle'
+        ]);
+
+        Type::create([
+            'name' => 'Sport',
+            'slug' => 'sport'
         ]);
 
         Type::create([
@@ -95,9 +124,47 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Type::create([
-            'name' => 'MPV',
-            'slug' => 'mpv'
+            'name' => 'Crossover',
+            'slug' => 'crossover'
         ]);
+
+        Type::create([
+            'name' => 'Van',
+            'slug' => 'van'
+        ]);
+
+        Type::create([
+            'name' => 'Pickup',
+            'slug' => 'pickup'
+        ]);
+
+        Type::create([
+            'name' => 'Scooter',
+            'slug' => 'scooter'
+        ]);
+
+        Type::create([
+            'name' => 'Bebek',
+            'slug' => 'bebek'
+        ]);
+
+        Type::create([
+            'name' => 'Big Scooter',
+            'slug' => 'big-scooter'
+        ]);
+
+        Type::create([
+            'name' => 'Off-road',
+            'slug' => 'off-road'
+        ]);
+
+        Type::create([
+            'name' => 'Underbone',
+            'slug' => 'underbone'
+        ]);
+
+
+        ##########################################
 
         Vehicle::create([
             'title' => 'Stargazer',
@@ -105,11 +172,13 @@ class DatabaseSeeder extends Seeder
             'brand_id' => 1,
             'type_id' => 2,
             'slug' => 'stargazer',
-            'transmission' => 'Matic',
+            'transmission' => 'Automatic',
             'capacity' => 7,
             'power' => 1400,
             'price' => 450000,
-            'start_date' => "2023-11-23"
+            'plate_num' => 'D8837SFX',
+            'color' => 'Silver',
+            'extras' => 'Kursi bayi, bantal duduk, pelindung kaca'
         ]);
 
         Vehicle::create([
@@ -118,11 +187,13 @@ class DatabaseSeeder extends Seeder
             'brand_id' => 2,
             'type_id' => 2,
             'slug' => 'grand-livina',
-            'transmission' => 'Matic',
+            'transmission' => 'Automatic',
             'capacity' => 7,
             'power' => 1400,
             'price' => 400000,
-            'start_date' => "2023-11-25"
+            'plate_num' => 'B5523KFD',
+            'color' => 'red',
+            'extras' => 'Kursi bayi, bantal duduk, pelindung kaca',
         ]);
 
         Vehicle::create([
@@ -131,18 +202,20 @@ class DatabaseSeeder extends Seeder
             'brand_id' => 4,
             'type_id' => 3,
             'slug' => 'sigra',
-            'transmission' => 'Matic',
+            'transmission' => 'Automatic',
             'capacity' => 7,
             'power' => 1300,
             'price' => 325000,
-            'start_date' => "2023-11-23"
+            'plate_num' => 'B9395FFS',
+            'color' => 'black',
+            'extras' => 'Kursi bayi, bantal duduk, pelindung kaca',
         ]);
 
         Rent::create([
             'user_id' => 1,
             'vehicle_id' => 1,
-            'start_date' => '2023-11-23',
-            'end_date' => '2023-11-24'
+            'start_date' => '2023-11-23 07:30',
+            'end_date' => '2023-11-24 07:30'
         ]);
             
     }

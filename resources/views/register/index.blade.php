@@ -105,5 +105,5 @@
             </div>
         </form>
     </div>
-    <a href="/login">to login</a>
+    {{-- <a href="/login">to login</a> --}}
 @endsection

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vehicle;
+use App\Models\Category;
+use App\Models\Brand;
+use App\Models\Type;
 use Illuminate\Http\Request;
-
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 class DashboardVehicleController extends Controller
 {
     /**
@@ -22,7 +25,11 @@ class DashboardVehicleController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.vehicles.create', [
+            'categories' => Category::all(),
+            'brands' => Brand::all(),
+            'types' => Type::all()
+        ]);
     }
 
     /**
@@ -30,7 +37,25 @@ class DashboardVehicleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'slug' => 'required|unique:vehicles',
+            'category_id' => 'required',
+            'brand_id' => 'required',
+            'type_id' => 'required',
+            'transmission' => 'required',
+            'capacity' => 'required|max:2',
+            'power' => 'required',
+            'price' => 'required',
+            'plate_num' => 'required',
+            'color' => 'required'
+        ]);
+
+        // $validatedData['user_id'] = auth()->user()->id;
+
+        Vehicle::create($validatedData);
+
+        return redirect('/dashboard/vehicles')->with('success', 'Kendaraan baru berhasil ditambahkan!');
     }
 
     /**
@@ -65,5 +90,11 @@ class DashboardVehicleController extends Controller
     public function destroy(Vehicle $vehicle)
     {
         //
+    }
+
+    public function checkSlug (Request $request)
+    {
+        $slug = SlugService::createSlug(Vehicle::class, 'slug', $request->title . '-' . $request->plate_num);
+        return response()->json(['slug' => $slug]);
     }
 }

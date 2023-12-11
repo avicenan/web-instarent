@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light top-0 position-absolute w-100 p-2 main-navbar">
+<nav class="navbar navbar-expand-lg top-0 position-absolute w-100 p-2 main-navbar" style="background-color: #ffd53e; z-index: 99;">
     <div class="container">
       <a class="navbar-brand" href="/">
         <img src="/img/instarent-logo.png" alt="" width="40px">
@@ -8,7 +8,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav ms-auto" style="">
           <li class="nav-item">
             <a class="nav-link {{ Request::is('vehicles') ? 'active' : '' }}" href="/vehicles">Katalog</a>
           </li>

@@ -1,11 +1,18 @@
 @extends('dashboard.layouts.main')
 
 @section('container')
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-  <h1 class="h2">My Vehicles</h1>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+  <h1 class="h2">Kendaraan</h1>
 </div>
 
+@if(session()->has('success'))
+  <div class="alert alert-success" role="alert">
+    {{ session('success') }}
+  </div>
+@endif
+
 <div class="table-responsive col-lg-8">
+    <a href="/dashboard/vehicles/create" class="btn btn-primary mb-3">Tambah Kendaraan Baru</a>
     <table class="table table-striped table-sm">
       <thead>
         <tr>
@@ -24,11 +31,11 @@
         <tr>
             <td>{{ $loop->iteration }}</td>
             <td>{{ $vehicle->title }}</td>
-            <td>Ini nomor plat</td>
+            <td>{{ $vehicle->plate_num }}</td>
             <td>{{ $vehicle->brand->name}}</td>
             <td>{{ $vehicle->type->name }}</td>
-            <td>warna</td>
-            <td>{{ $vehicle->price }}</td>
+            <td>{{ $vehicle->color }}</td>
+            <td>IDR {{ $vehicle->price }}</td>
             <td>
                 <a href="/dashboard/vehicles/{{ $vehicle->slug }}" class="badge bg-info"><i data-feather="eye"></i></a>
                 <a href="#" class="badge bg-warning"><i data-feather="edit"></i></a>

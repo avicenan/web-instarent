@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Rent;
 use App\Http\Requests\StoreRentRequest;
 use App\Http\Requests\UpdateRentRequest;
+use App\Models\Vehicle;
 
 class RentController extends Controller
 {
@@ -13,7 +14,13 @@ class RentController extends Controller
      */
     public function index()
     {
-        //
+        return view('rent', [
+            'title' => 'Sewa Kendaraan',
+            'active' => 'vehicles',
+            'vehicle' => Vehicle::firstWhere('slug', '=', session('vehicle')),
+            'start_date' => session('start_date'),
+            'end_date' => session('end_date')
+        ]);
     }
 
     /**
