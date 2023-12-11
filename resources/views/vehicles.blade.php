@@ -60,7 +60,7 @@
 
           <div class="col-10">
             <div class="form-floating mb-3">
-              <input type="datetime-local" class="form-control" id="start_date" value="{{ session('start_date') }}">
+              <input type="datetime-local" class="form-control" id="start_date" name="start_date" value="{{ session('start_date') }}">
               <label for="start_date">Tanggal Sewa</label>
             </div>
           </div>
@@ -70,7 +70,7 @@
 
           <div class="col-10">
             <div class="form-floating mb-3">
-              <input type="datetime-local" class="form-control" id="end_date" value="{{ session('end_date') }}">
+              <input type="datetime-local" class="form-control" id="end_date" name="end_date" value="{{ session('end_date') }}">
               <label for="end_date">Tanggal Kembali</label>
             </div>
           </div>
