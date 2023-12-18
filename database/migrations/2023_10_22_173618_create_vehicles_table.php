@@ -24,7 +24,7 @@ return new class extends Migration
             $table->integer('price');
             $table->string('plate_num')->unique();
             $table->string('color');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('extras')->nullable();
             $table->timestamps();
         });
