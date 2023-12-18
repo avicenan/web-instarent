@@ -42,9 +42,9 @@
         <div class="col-md-6">
             <div class="thumbnail mb-3 text-center"">
                 @if ($vehicle->image)
-                    <img class="img-thumbnail img-fluid" src="{{ asset('/storage/' . $vehicle->image) }}" alt="" style="max-height: 250px">
+                    <img class="img-thumbnail border-0 img-fluid" src="{{ asset('/storage/' . $vehicle->image) }}" alt="" style="max-height: 250px">
                 @else
-                    <img class="img-thumbnail img-fluid" src="/img/no-image.png" alt="" style="max-height: 250px">
+                    <img class="img-thumbnail border-0 img-fluid" src="/img/no-image.png" alt="" style="max-height: 250px">
                 @endif
             </div>
             {{-- Button left --}}
