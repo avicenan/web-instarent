@@ -23,6 +23,13 @@ use App\Http\Controllers\DashboardRentController;
 |
 */
 
+// test route
+Route::get('/welcome', function() {
+    return view('welcome', [
+        'rent' => session()->get('rent')
+    ]);
+})->name('welcome');
+
 Route::get('/', function () {
     
     if(request('start_date') && request('end_date')) {
@@ -41,7 +48,7 @@ Route::get('/', function () {
         "active" => "home",
         "vehicles" => Vehicle::all()
     ]);
-});
+})->name('home');
 
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 
@@ -53,6 +60,8 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 
 Route::post('/logout', [LoginController::class, 'logout']);
 
+Route::post('/cancel', [RentController::class, 'cancel']);
+
 Route::get('/dashboard', function() {
     return view('dashboard.index');
 })->middleware('auth');
@@ -61,7 +70,7 @@ Route::get('/vehicles', [VehicleController::class, 'index']);
 
 Route::get('/vehicles/{vehicle:slug}', [VehicleController::class, 'show']);
 
-Route::post('/vehicles/{vehicle:slug}', [VehicleController::class, 'storeSession']);
+Route::post('/vehicles/{vehicle:slug}', [VehicleController::class, 'store']);
 
 Route::get('/brands', function() {
     return view('brands', [
@@ -80,8 +89,6 @@ Route::get('/brands/{brand:slug}', function(Brand $brand) {
     ]);
 });
 
-Route::get('/rent', [RentController::class, 'index'])->middleware('auth');
-
 Route::post('/rent', [RentController::class, 'store']);
 
 Route::get('/dashboard/vehicles/checkSlug', [DashboardVehicleController::class, 'checkSlug'])->middleware('auth');
@@ -89,3 +96,16 @@ Route::get('/dashboard/vehicles/checkSlug', [DashboardVehicleController::class, 
 Route::resource('/dashboard/vehicles', DashboardVehicleController::class)->middleware('auth');
 
 Route::resource('/dashboard/rents', DashboardRentController::class)->middleware('auth');
+
+
+// Renting Process
+
+Route::get('rent/create-step-one', [RentController::class , 'createStepOne'])->name('rent.create.step.one')->middleware('auth');
+Route::post('rent/create-step-one', [RentController::class , 'postCreateStepOne'])->name('rent.create.step.one.post')->middleware('auth');
+  
+Route::get('rent/create-step-two', [RentController::class , 'createStepTwo'])->name('rent.create.step.two')->middleware('auth');
+Route::post('rent/create-step-two', [RentController::class , 'postCreateStepTwo'])->name('rent.create.step.two.post')->middleware('auth');
+  
+Route::get('rent/create-step-three', [RentController::class , 'createStepThree'])->name('rent.create.step.three')->middleware('auth');
+Route::post('rent/create-step-three', [RentController::class , 'postCreateStepThree'])->name('rent.create.step.three.post')->middleware('auth');
+

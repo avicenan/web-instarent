@@ -1,45 +1,65 @@
+@include('partials.navbar')
+
 @extends('layouts.main')
 
 {{-- Hero start --}}
-<div class="hero bg-prim row justify-content-center" style="max-height: 536px; z-index:-99; mt-0">
-    <div class="col-8" style="margin-top: 6rem;">
-      <div class="hero-items">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-4">
-                    <h4 class="text-white fw-bold fsize-10 mb-5">Best Place to<br>Rented a Dream<br>Vechicles</h4>
-                    <h5 class="text-white fw-bold fsize-8 lh-base" >Tidak perlu mencari lebih jauh, InstaRent adalah tempat terbaik untuk menyewa kendaraan impian Anda</h5>
-                </div>
-                <div class="col-lg-8 text-center position-relative">
-                    <div class="card position-absolute" style="height: 180px; width:180px; left:50px; border-radius: 30px;
-                    background: var(--White, #FFF);" hidden>
+<div class="hero bg-prim row justify-content-center p-0 m-0" style="max-height: 35vh; width: 100%; z-index:-99;">
+  <div class="col-lg-10 hero-content mt-4" style="padding: 0 5%; max-width: 1650px">
+    <div class="hero-items">
+      <div class="container-fluid">
+          <div class="row justify-content-center">
+              <div class="col-lg-5">
+                  <h4 class="hero-text-prim fw-semibold fsize-11 mb-3 text-white">Best Place to<br>Rented a Dream<br>Vechicles</h4>
+                  <h5 class="hero-text-sec text-white fw-medium fsize-4 lh-base" >Tidak perlu mencari lebih jauh, InstaRent adalah tempat terbaik untuk menyewa kendaraan impian Anda</h5>
+              </div>
+              <div class="col-lg-7 text-end position-relative">
+                  <a href="/vehicles?start_date={{ session('start_date') }}&end_date={{ session('end_date') }}&search=vespa#search">
+                    <div class="card card-sale position-absolute rounded-5 border-0" style="height: 120px; width:120px; left:50px;
+                    background: var(--White, #FFF);">
                     </div>
-                    <img src="/img/home-hero-car.png" class="mt-5 img-fluid" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
+                  </a>
+                  <img src="/img/home-hero-car.png" class="hero-car-img mt-4 img-fluid" alt="" style="max-height: 250px">
+              </div>
+          </div>
+      </div>
   </div>
 </div>
-<div class="hero bg-yellow8" style="height: 137px"></div>
+</div>
+<div class="hero-sec bg-yellow8" style="height: 8.7vh"></div>
 {{-- Hero end --}}
 
 @section('container')
 
-    {{-- Brand start --}}
-    <div class="brand inline">
-        <div class="d-flex justify-content-evenly p-4 mb-4">
-            <img src="/img/car-brand-1.png" width="95px" alt="toyota">
-            <img src="/img/car-brand-1.png" width="95px" alt="toyota">
-            <img src="/img/car-brand-1.png" width="95px" alt="toyota">
-            <img src="/img/car-brand-1.png" width="95px" alt="toyota">
-            <img src="/img/car-brand-1.png" width="95px" alt="toyota">
-            <img src="/img/car-brand-1.png" width="95px" alt="toyota">
-            <img src="/img/car-brand-1.png" width="95px" alt="toyota">
-            <img src="/img/car-brand-1.png" width="95px" alt="toyota">
-        </div>
+{{-- Brand start --}}
+<div class="brand my-4 mx-2"">
+    <div class="row mb-4">
+      <div class="col text-center">
+        <img src="/img/car-brand-1.png" alt="toyota" class="img-fluid" style="max-height: 50px">
+      </div>
+      <div class="col text-center">
+        <img src="/img/car-brand-1.png" alt="toyota" class="img-fluid" style="max-height: 50px">
+      </div>
+      <div class="col text-center">
+        <img src="/img/car-brand-1.png" alt="toyota" class="img-fluid" style="max-height: 50px">
+      </div>
+      <div class="col text-center">
+        <img src="/img/car-brand-1.png" alt="toyota" class="img-fluid" style="max-height: 50px">
+      </div>
+      <div class="col text-center">
+        <img src="/img/car-brand-1.png" alt="toyota" class="img-fluid" style="max-height: 50px">
+      </div>
+      <div class="col text-center">
+        <img src="/img/car-brand-1.png" alt="toyota" class="img-fluid" style="max-height: 50px">
+      </div>
+      <div class="col text-center">
+        <img src="/img/car-brand-1.png" alt="toyota" class="img-fluid" style="max-height: 50px">
+      </div>
+      <div class="col text-center">
+        <img src="/img/car-brand-1.png" alt="toyota" class="img-fluid" style="max-height: 50px">
+      </div>
     </div>
-    {{-- Brand end --}}
+</div>
+{{-- Brand end --}}
 
     {{-- Catalog start --}}
     {{-- <div class="container-fluid mb-5" id="catalog" style="padding: 0 10%" >
@@ -104,52 +124,55 @@
     </div> --}}
     {{-- Catalog end --}}
 
-    {{-- Benefits start --}}
-    <div class="container-fluid mb-5 bg-green7 mx-auto" id="benefits" style="min-height:500px" >
-      <div class="row">
-          <div class="col">foto</div>
-          <div class="col">benefit</div>
-      </div>
+{{-- Benefits start --}}
+<div class="benefits d-flex justify-content-center">
+  <div class="my-4 position-absolute bg-green7 w-100" style="min-height:500px; z-index: -1;"></div>
+  <div class="my-4 m-0 p-0 w-100 position" id="benefits" style="min-height:500px;" >
+    <div class="row py-4 justify-content-center">
+      <div class="col-md-5">Photo</div>
+      <div class="col-md-7">Benefits</div>
     </div>
-    {{-- Benefits end --}}
+  </div>
+</div>
+{{-- Benefits end --}}
 
-    {{-- Steps start --}}
-    <div class="container-fluid mb-5 text-center" id="howTo">
-      <h1 class="fs-4 fw-bold mb-5">Cara Melakukan Pembayaran</h1>
-      <div class="row">
-        <div class="col-md-2">
-          <div class="card" style="border:0">
-            <div class="rounded-number rounded-circle bg-prim fw-bold fs-4 text-white mx-auto" style="width: 70px; height:70px; padding:20px 0">
-              <span>1</span>
-            </div>
-            <img src="..." class="card-img-top" alt="icon">
-            <div class="card-body">
-              <h5 class="card-title">Cari kendaraan</h5>
-              <p class="card-text">Mencari kendaraan yang ingin disewa</p>
-            </div>
-          </div>
+{{-- Steps start --}}
+<div class="container-fluid mb-5 text-center" id="howTo">
+  <h1 class="fs-4 fw-bold mb-5">Cara Melakukan Pembayaran</h1>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="card" style="border:0">
+        <div class="rounded-number rounded-circle bg-prim fw-bold fs-4 text-white mx-auto" style="width: 70px; height:70px; padding:20px 0">
+          <span>1</span>
         </div>
-        <div class="col-md-3 d-flex justify-content-between">
-          {{-- <div class="circle bg-prim rounded-circle my-auto" style="width: 19px; height:19px"></div>
-          <div class="absolute"><hr></div>
-          <div class="circle bg-prim rounded-circle my-auto" style="width: 19px; height:19px"></div> --}}
-        </div>
-        <div class="col-md-2">
-          <div class="rounded-number rounded-circle bg-prim fw-bold fs-4 text-white mx-auto" style="width: 70px; height:70px; padding:20px 0">
-            <span>2</span>
-          </div>
-        </div>
-        <div class="col-md-3 m-auto">
-          {{-- <span><hr></span> --}}
-        </div>
-        <div class="col-md-2">
-          <div class="rounded-number rounded-circle bg-prim fw-bold fs-4 text-white mx-auto" style="width: 70px; height:70px; padding:20px 0">
-            <span>3</span>
-          </div>
+        <img src="..." class="card-img-top" alt="icon">
+        <div class="card-body">
+          <h5 class="card-title">Cari kendaraan</h5>
+          <p class="card-text">Mencari kendaraan yang ingin disewa</p>
         </div>
       </div>
     </div>
-    {{-- Steps end --}}
+    <div class="col-md-3 d-flex justify-content-between">
+      {{-- <div class="circle bg-prim rounded-circle my-auto" style="width: 19px; height:19px"></div>
+      <div class="absolute"><hr></div>
+      <div class="circle bg-prim rounded-circle my-auto" style="width: 19px; height:19px"></div> --}}
+    </div>
+    <div class="col-md-2">
+      <div class="rounded-number rounded-circle bg-prim fw-bold fs-4 text-white mx-auto" style="width: 70px; height:70px; padding:20px 0">
+        <span>2</span>
+      </div>
+    </div>
+    <div class="col-md-3 m-auto">
+      {{-- <span><hr></span> --}}
+    </div>
+    <div class="col-md-2">
+      <div class="rounded-number rounded-circle bg-prim fw-bold fs-4 text-white mx-auto" style="width: 70px; height:70px; padding:20px 0">
+        <span>3</span>
+      </div>
+    </div>
+  </div>
+</div>
+{{-- Steps end --}}
 
     <a href="/register" class="my-auto">to register</a>
     

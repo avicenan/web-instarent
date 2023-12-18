@@ -56,14 +56,14 @@
                     </div>
                 </div>
             </div>
-            <div class="row mb-5">
+            {{-- <div class="row mb-5">
                 <div class="col-md-12">
                     <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input" id="tnc" name="tnc">
                         <label class="form-check-label fw-medium" for="tnc">Saya menyetujui <span><a href="#">Syarat dan Ketentuan</a></span> yang berlaku</label>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="row text-center">
                 <div class="col-md-12">
                     <button type="submit" class="btn btn-lg mx-3 fw-medium fs-5 bg-ter1 bd-ter1 text-white">Masuk</button>

@@ -18,12 +18,13 @@ return new class extends Migration
             $table->foreignId('brand_id');
             $table->foreignId('type_id');
             $table->string('slug')->unique();
-            $table->string('transmission');
+            $table->foreignId('transmission_id');
             $table->integer('capacity');
             $table->integer('power');
             $table->integer('price');
             $table->string('plate_num')->unique();
             $table->string('color');
+            $table->string('image');
             $table->string('extras')->nullable();
             $table->timestamps();
         });

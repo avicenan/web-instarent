@@ -13,7 +13,8 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,700;1,300;1,400;1,700&family=Recursive&family=Rubik:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
-
+        <link href="https://fonts.googleapis.com/css2?family=Pattaya&display=swap" rel="stylesheet">
+        
         {{-- Google Material Icons --}}
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         
@@ -32,13 +33,15 @@
         {{-- Bootsrap Icons --}}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 
-        <title>Instarent | {{ $title }}</title>
+        <title>Instarent</title>
     </head>
     <body>
 
-        @include('partials.navbar')
+        @if (!(Route::is('home'))) 
+            @include('partials.navbar')
+        @endif
 
-        <div class="row justify-content-center">
+        <div class="row justify-content-center m-0">
             <div class="page-container col-lg-10" style="padding: 0 5%; max-width: 1650px">
                 @yield('container')
             </div>
@@ -47,6 +50,20 @@
             
         <script>
             feather.replace();
+        </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function (event) {
+                var scrollpos = sessionStorage.getItem('scrollpos');
+                if (scrollpos) {
+                    window.scrollTo(0, scrollpos);
+                    sessionStorage.removeItem('scrollpos');
+                }
+            });
+
+            window.addEventListener("beforeunload", function (e) {
+                sessionStorage.setItem('scrollpos', window.scrollY);
+            });
         </script>
     
     </body>

@@ -8,9 +8,13 @@
 <div class="container-fluid my-5">
     <div class="row">
         <div class="nav">
-            <a href="/dashboard/vehicles" class="btn btn-success mx-1"><i data-feather="arrow-left"></i> Back to All My Vehicle</a>
-            <a href="" class="btn btn-warning mx-1"><i data-feather="edit"></i> Edit</a>
-            <a href="" class="btn btn-danger mx-1"><i data-feather="x-circle"></i> Delete</a>
+            <a href="/dashboard/vehicles" class="btn btn-success mx-1 my-auto"><i data-feather="arrow-left" style="margin-bottom: 3px"></i> Back to All My Vehicle</a>
+            <a href="/dashboard/vehicles/{{ $vehicle->slug }}/edit" class="btn btn-warning mx-1 my-auto"><i data-feather="edit" style="margin-bottom: 3px"></i> Edit</a>
+            <form action="/dashboard/vehicles/{{ $vehicle->slug }}" method="post" class="d-inline">
+                @method('delete')
+                @csrf
+                <button class="btn btn-danger mx-1 border-0"  onclick="return confirm('Are you sure?')"><i data-feather="x-circle" style="margin-bottom: 3px"></i> <span class="fsize-5 fweig-reg">Delete</span></button>
+            </form>
         </div>
     </div>
 
@@ -54,7 +58,7 @@
                 {{-- Image start --}}
                         <div class="col-md-6">
                             <div class="thumbnail mb-3">
-                                <img class="img-thumbnail img-fluid" src="/img/stargizer.png" alt="" width="732px">
+                                <img class="img-thumbnail img-fluid" src="{{ asset('/storage/' . $vehicle->image) }}" alt="{{ $vehicle->title }}" width="732px">
                             </div>
                             {{-- Button left --}}
                             {{-- <div class="img-carousel d-flex flex-wrap justify-content-start">
@@ -79,7 +83,7 @@
                                                 <i data-feather="user" class=" me-1 align-middle"></i> {{ $vehicle->capacity }} Kursi
                                             </div>
                                             <div class="item me-3 mb-4 pe-4 fsize-3">
-                                                <i data-feather="sliders" class="me-1 align-middle"></i> {{ $vehicle->transmission }}
+                                                <i data-feather="sliders" class="me-1 align-middle"></i> {{ $vehicle->transmission->name }}
                                             </div>
                                         </div>
                                         <div class="col">

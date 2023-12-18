@@ -9,6 +9,7 @@ use App\Models\Brand;
 use \App\Models\User;
 use \App\Models\Category;
 use \App\Models\Type;
+use \App\Models\Transmission;
 use App\Models\Rent;
 
 class DatabaseSeeder extends Seeder
@@ -163,6 +164,23 @@ class DatabaseSeeder extends Seeder
             'slug' => 'underbone'
         ]);
 
+        // Transmission ################################
+
+        Transmission::create([
+            'name' => 'Automatic',
+            'slug' => 'automatic'
+        ]);
+
+        Transmission::create([
+            'name' => 'Manual',
+            'slug' => 'manual'
+        ]);
+
+        Transmission::create([
+            'name' => 'Electric Vehicle',
+            'slug' => 'electric-vehicle'
+        ]);
+
 
         ##########################################
 
@@ -172,7 +190,7 @@ class DatabaseSeeder extends Seeder
             'brand_id' => 1,
             'type_id' => 2,
             'slug' => 'stargazer',
-            'transmission' => 'Automatic',
+            'transmission_id' => 1,
             'capacity' => 7,
             'power' => 1400,
             'price' => 450000,
@@ -187,7 +205,7 @@ class DatabaseSeeder extends Seeder
             'brand_id' => 2,
             'type_id' => 2,
             'slug' => 'grand-livina',
-            'transmission' => 'Automatic',
+            'transmission_id' => 1,
             'capacity' => 7,
             'power' => 1400,
             'price' => 400000,
@@ -202,7 +220,7 @@ class DatabaseSeeder extends Seeder
             'brand_id' => 4,
             'type_id' => 3,
             'slug' => 'sigra',
-            'transmission' => 'Automatic',
+            'transmission_id' => 1,
             'capacity' => 7,
             'power' => 1300,
             'price' => 325000,

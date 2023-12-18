@@ -6,12 +6,12 @@
 </div>
 
 @if(session()->has('success'))
-  <div class="alert alert-success" role="alert">
+  <div class="alert alert-success col-lg-10" role="alert">
     {{ session('success') }}
   </div>
 @endif
 
-<div class="table-responsive col-lg-8">
+<div class="table-responsive col-lg-10">
     <a href="/dashboard/vehicles/create" class="btn btn-primary mb-3">Tambah Kendaraan Baru</a>
     <table class="table table-striped table-sm">
       <thead>
@@ -35,11 +35,15 @@
             <td>{{ $vehicle->brand->name}}</td>
             <td>{{ $vehicle->type->name }}</td>
             <td>{{ $vehicle->color }}</td>
-            <td>IDR {{ $vehicle->price }}</td>
+            <td>IDR {{ number_format($vehicle->price) }}</td>
             <td>
                 <a href="/dashboard/vehicles/{{ $vehicle->slug }}" class="badge bg-info"><i data-feather="eye"></i></a>
-                <a href="#" class="badge bg-warning"><i data-feather="edit"></i></a>
-                <a href="#" class="badge bg-danger"><i data-feather="x-circle"></i></a>
+                <a href="/dashboard/vehicles/{{ $vehicle->slug}}/edit" class="badge bg-warning"><i data-feather="edit"></i></a>
+                <form action="/dashboard/vehicles/{{ $vehicle->slug }}" method="post" class="d-inline">
+                  @method('delete')
+                  @csrf
+                  <button class="badge bg-danger border-0"  onclick="return confirm('Are you sure?')"><i data-feather="x-circle"></i></button>
+                </form>
             </td>
         </tr>
         @endforeach

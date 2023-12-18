@@ -9,6 +9,10 @@ class Rent extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['user_id', 'vehicle_id', 'nama_lengkap', 'pekerjaan', 'alamat', 'universitas', 'telp_num', 'nim', 'sec_contact', 'jurusan', 'id_line', 'angkatan', 'username_instagram', 'kelas', 'start_date', 'end_date', 'rute_tujuan', 'rute_tujuan_ket', 'ktp', 'sim', 'ktm'];
+
+    // protected $guarded = ['id'];
+    
     public function customer()
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -17,10 +21,5 @@ class Rent extends Model
     public function vehicle()
     {
         return $this->belongsTo(Vehicle::class);
-    }
-
-    public function vehicles()
-    {
-        return $this->hasMany(Vehicle::class);
     }
 }

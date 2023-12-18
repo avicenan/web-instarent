@@ -226,8 +226,41 @@ a {
     cursor: pointer;
 }
 
+/* Custom */
+
 @media (max-width: 1000px) {
     .main-navbar {
         background-color: rgba(255, 255, 255, 0.8);
+    }
+}
+
+@media (max-width: 990px) {
+    .page-container {
+        margin-top: 5rem;
+    }
+
+    .hero-car-img {
+        display: none;
+    }
+
+    .hero-sec {
+        display: none;
+    }
+
+    .hero-text-sec {
+        display: none;
+    }
+
+    .navbar {
+        position: fixed;
+    }
+
+    .auth-button {
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+
+    .card-sale {
+        display: none;
     }
 }

@@ -6,22 +6,29 @@ use App\Models\Vehicle;
 use App\Models\Brand;
 use App\Http\Requests\StoreVehicleRequest;
 use App\Http\Requests\UpdateVehicleRequest;
+use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Transmission;
 use App\Models\Type;
 use Carbon\Carbon;
 
+
 class VehicleController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {   
+        $today = Carbon::today(7)->addHours(10);
+        $tomorrow = Carbon::tomorrow(7)->addHours(10);
 
-        if(request('start_date') && request('end_date')) {
-            session(['start_date' => request('start_date')]);
-            session(['end_date' => request('end_date')]);
+        // $validatedData = $request->validate([
+        //     'start_date' => 'required|min:'
+        // ]);
+
+
+        if($request->start_date && $request->end_date) {
+            session(['start_date' => $request->start_date]);
+            session(['end_date' => $request->end_date]);
         } else {
-            $today = Carbon::today();
-            $tomorrow = Carbon::tomorrow();
-
             session(['start_date' => $today]);
             session(['end_date' => $tomorrow]);
         }
@@ -36,38 +43,48 @@ class VehicleController extends Controller
             "brands" => Brand::all(),
             "categories" => Category::all(),
             "types" => Type::all(),
-            "start_date_string" => $start_date->toDayDateTimeString(),
-            "end_date_string" => $end_date->toDayDateTimeString(),
+            "transmissions" => Transmission::all(),
+            "today" => Carbon::today(7),
+            "tommorow" => Carbon::tomorrow(7),
+            "start_date" => $start_date,
+            "end_date" => $end_date,
             "duration" => [
                 "day" => $end_date->day - $start_date->day
             ]
         ]);
     }
-    public function show(Vehicle $vehicle)
+    public function show(Vehicle $vehicle, Request $request)
     {   
+        
         $start_date = new Carbon(session('start_date'));
         $end_date = new Carbon(session('end_date'));
 
         return view('vehicle', [
             "title" => "Vehicle Details",
-            "active" => "vehicles",
             "vehicle" => $vehicle,
-            "vehicles" => Vehicle::latest()->filter(request(['start_date', 'end_date'])),
-            "start_date_string" => $start_date->toDayDateTimeString(),
-            "end_date_string" => $end_date->toDayDateTimeString(),
+            "vehicles" => Vehicle::all()->filter(session(['start_date', 'end_date'])),
+            "start_date" => $start_date,
+            "end_date" => $end_date,
             "duration" => [
                 "day" => $end_date->day - $start_date->day
             ],
             "rent_fee" => 5000
         ]);
     }
-
-    public function storeSession()
-    {
-        session(['vehicle' => request('vehicle')]);
-
-        return redirect('/rent');
-    }
     
+    public function store(Vehicle $vehicle, Request $request)
+    {
+        $start_date = new Carbon(session('start_date'));
+        $end_date = new Carbon(session('end_date'));
+        
+        session([
+            'start_date' => $start_date,
+            'end_date' => $end_date,
+            'vehicle' => $vehicle,
+            'rent_fee' => 5000
+        ]);
+
+        return redirect('/rent/create-step-one');
+    }
 
 }

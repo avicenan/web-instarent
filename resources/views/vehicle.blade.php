@@ -1,20 +1,22 @@
 @extends('layouts.main')
 
 @section('container') 
-<div class="container-fluid mb-4" style="margin-top: 5rem;">
+<div class="container-fluid mb-4 mt-3">
+
+    <div class="my-3">
+        <a href="/vehicles?start_date={{ session('start_date')}}&end_date={{ session('end_date') }}" class="text-decoration-none fweig-medium"><i data-feather="arrow-left"></i> Kembali</a>
+    </div>
 
 {{-- Search Bar --}}
     <div class="row mb-4">
         <div class="col">
             <div class="card border-2 border-warning"">
                 <div class="card-body">
-                  {{-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="card-link">Card link</a> --}}
                   <div class="row card-text align-items-center" id="date-range">
                     <div class="col d-flex">
-                        <p class="p-0 m-0">{{ $start_date_string }}</p>
+                        <p class="p-0 m-0">{{ $start_date->toDayDateTimeString() }}</p>
                         <i data-feather="arrow-right" class="mx-4"></i>
-                        <p class="p-0 m-0">{{ $end_date_string }}</p>
+                        <p class="p-0 m-0">{{ $end_date->toDayDateTimeString() }}</p>
                     </div>
                     <div class="col text-end">
                         <a href="#" id="edit-date-toggle" class="bg-success text-white text-decoration-none p-2 rounded-2">Sunting</a>
@@ -38,8 +40,12 @@
         
 {{-- Image start --}}
         <div class="col-md-6">
-            <div class="thumbnail mb-3">
-                <img class="img-thumbnail img-fluid" src="/img/stargizer.png" alt="" width="732px">
+            <div class="thumbnail mb-3 text-center"">
+                @if ($vehicle->image)
+                    <img class="img-thumbnail img-fluid" src="{{ asset('/storage/' . $vehicle->image) }}" alt="" style="max-height: 250px">
+                @else
+                    <img class="img-thumbnail img-fluid" src="/img/no-image.png" alt="" style="max-height: 250px">
+                @endif
             </div>
             {{-- Button left --}}
             {{-- <div class="img-carousel d-flex flex-wrap justify-content-start">
@@ -64,7 +70,7 @@
                         <i data-feather="user" class=" me-1 align-middle"></i> {{ $vehicle->capacity }} Kursi
                     </div>
                     <div class="item me-3 mb-4 pe-4 fsize-3">
-                        <i data-feather="sliders" class="me-1 align-middle"></i> {{ $vehicle->transmission }}
+                        <i data-feather="sliders" class="me-1 align-middle"></i> {{ $vehicle->transmission->name }}
                     </div>
                 </div>
                 <div class="col">
@@ -80,7 +86,7 @@
     </div>
 {{-- Specs end --}}
 
-{{-- Items start --}}
+{{-- Extras start --}}
             <div class="extras">
                 <h2 class="fsize-5 fweig-semibold mb-3">Tambahan</h2>
                 <div class="row">
@@ -90,7 +96,7 @@
                 </div>
             </div>
         </div>
-{{-- Items end --}}
+{{-- Extras end --}}
 
     </div>
     {{-- Details start --}}
@@ -108,24 +114,32 @@
                 <div class="card-body">
                   <h5 class="card-title mb-3 fweig-bold ">Rincian harga</h5>
                   <div class="row">
-                    <div class="col">Biaya sewa {{ $vehicle->title }}</div>
-                    <div class="col text-end">IDR {{ ($vehicle->price)*($duration["day"]) }}</div>
+                    <div class="col">
+                        <h6>Biaya sewa {{ $vehicle->title }}</h6>
+                    </div>
+                    <div class="col text-end">
+                        <h6>IDR {{ number_format(($vehicle->price)*($duration["day"])) }}</h6>
+                    </div>
                   </div>
                   <div class="row">
-                    <div class="col">Biaya layanan</div>
-                    <div class="col text-end">IDR {{ $rent_fee }}</div>
+                    <div class="col">
+                        <h6 class="card-text fsize-4 fweig-reg txt-ntrl500">Biaya layanan</h6>
+                    </div>
+                    <div class="col text-end">
+                        <h6 class="card-text fsize-4 fweig-reg txt-ntrl500">IDR {{ number_format($rent_fee) }}</h6>
+                    </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col fweig-semibold fsize-6">Total biaya sewa untuk {{ $duration["day"] }} hari:</div>
-                    <div class="col text-end fweig-semibold fsize-6">IDR {{ (($vehicle->price)*($duration["day"]))+($rent_fee) }}</div>
+                    <div class="col text-end fweig-semibold fsize-6">IDR {{ number_format((($vehicle->price)*($duration["day"]))+($rent_fee)) }}</div>
                   </div>
                 </div>
               </div>
         </div>
     </div>
 
-    <div class="row my-4">
+    <div class="row mb-4">
         <div class="col">
             <div class="card"">
                 <div class="card-body">
@@ -139,14 +153,11 @@
         </div>
     </div>
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center my-5">
         <div class="col-8">
             <form action="/vehicles/{{ $vehicle->slug }}" method="POST" id="date_range">
                 @csrf
                 {{-- <a href="/rent" class="py-2 px-4 bg-ter1 text-decoration-none rounded-3 text-white fsize-6 fweig-xbold">Sewa</a> --}}
-                <input class="form-control" type="datetime-local" disabled hidden value="{{ session('start_date') }}" name="start_date" id="start_date">
-                <input class="form-control" type="datetime-local" disabled hidden value="{{ session('end_date') }}" name="end_date" id="end_date">
-                <input class="form-control" type="text" disabled hidden value="{{ $vehicle }}" name="vehicle" id="vehicle">
                 <button class="py-2 w-100 bg-ter1 rounded-2 text-white fsize-6 fweig-semibold border-0" type="submit">Lanjutkan Reservasi</button>
             </form>
         </div>
@@ -164,64 +175,68 @@
 
     <div class="row">
 {{-- Other Vehicle start --}}
-        <div class="container-fluid mb-5 p-5" id="catalog" >
+        <div class="container-fluid my-5" id="catalog" >
             <h1 class="fw-bold fs-4 mb-4">Unit Lainnya</h1>
-            <div class="row justify-between">
-            @foreach ($vehicles as $vehicle)
-            <div class="col-md-3 mb-3 position-relative">
-                <a href="/vehicles/{{ $vehicle->slug }}" class="text-decoration-none">
-                <div class="card py-4 px-1 shadow border-0" style="min-width: 300px; border-radius:10px;">
-                    <div class="card-body">
-                    <div class="container text-center">
-                        <div class="row align-items-center justify-content-between">
-                        <div class="col-10 text-start">
-                            <h4 class="card-title text-dark fweig-medium">{{ $vehicle["title"] }}</h4>
+            <div class="row">
+                <div class="col">
+                    @foreach (($vehicles->where('title', '=', $vehicle->title)->where('id', '!=', $vehicle->id)) as $vehicle)
+                        <p>{{ $vehicle->plate_num }}</p>
+                        {{-- Make cards for other unit --}}
+                        {{-- <div class="col-md-3 mb-3 position-relative">
+                        <a href="/vehicles/{{ $vehicle->slug }}" class="text-decoration-none">
+                        <div class="card py-4 px-1 shadow border-0" style="min-width: 300px; border-radius:10px;">
+                            <div class="card-body">
+                            <div class="container text-center">
+                                <div class="row align-items-center justify-content-between">
+                                <div class="col-10 text-start">
+                                    <h4 class="card-title text-dark fweig-medium">{{ $vehicle["title"] }}</h4>
+                                </div>
+                                <div class="col-2 text-end">
+                                    <span class="material-symbols-outlined txt-ntrl300">
+                                        favorite
+                                    </span>
+                                </div>
+                                </div>
+                            </div>
+                            <img src="/img/stargizer.png" class="card-img-top mb-3" alt="...">
+                            <div class="container text-center mb-4 txt-ntrl500">
+                                <div class="row align-items-center">
+                                <div class="col d-flex align-items-center">
+                                    <span class="material-symbols-outlined me-2">
+                                        auto_transmission
+                                    </span>
+                                    <span style="font-size: 12px">{{ $vehicle->transmission }}</span>
+                                </div>
+                                <div class="col d-flex align-items-center">
+                                    <span class="material-symbols-outlined me-2">
+                                        person
+                                    </span>
+                                    <span style="font-size: 12px">{{ $vehicle->capacity }} Orang</span>
+                                </div>
+                                <div class="col d-flex align-items-center">
+                                    <span class="material-symbols-outlined me-2">
+                                        speed
+                                    </span>
+                                    <span style="font-size: 12px">{{ $vehicle->power }} cc</span>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="container text-center">
+                                <div class="row align-items-center justify-content-between">
+                                <div class="col-6 text-start">
+                                    <p class="my-auto fsize-4 fw-medium text-dark">Rp. {{ $vehicle->price }}/<span class="txt-ntrl500">hari</span></p>
+                                </div>
+                                <div class="col-4 text-end position-absolute" style="right: 29px">
+                                    <a href="/rent" class="p-0 m-0"><button class="px-3 py-2 rounded bg-ter1 text-white border-0 fw-bold">Sewa</button></a>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
                         </div>
-                        <div class="col-2 text-end">
-                            <span class="material-symbols-outlined txt-ntrl300">
-                                favorite
-                            </span>
-                        </div>
-                        </div>
-                    </div>
-                    <img src="/img/stargizer.png" class="card-img-top mb-3" alt="...">
-                    <div class="container text-center mb-4 txt-ntrl500">
-                        <div class="row align-items-center">
-                        <div class="col d-flex align-items-center">
-                            <span class="material-symbols-outlined me-2">
-                                auto_transmission
-                            </span>
-                            <span style="font-size: 12px">{{ $vehicle->transmission }}</span>
-                        </div>
-                        <div class="col d-flex align-items-center">
-                            <span class="material-symbols-outlined me-2">
-                                person
-                            </span>
-                            <span style="font-size: 12px">{{ $vehicle->capacity }} Orang</span>
-                        </div>
-                        <div class="col d-flex align-items-center">
-                            <span class="material-symbols-outlined me-2">
-                                speed
-                            </span>
-                            <span style="font-size: 12px">{{ $vehicle->power }} cc</span>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="container text-center">
-                        <div class="row align-items-center justify-content-between">
-                        <div class="col-6 text-start">
-                            <p class="my-auto fsize-4 fw-medium text-dark">Rp. {{ $vehicle->price }}/<span class="txt-ntrl500">hari</span></p>
-                        </div>
-                        <div class="col-4 text-end position-absolute" style="right: 29px">
-                            <a href="/rent" class="p-0 m-0"><button class="px-3 py-2 rounded bg-ter1 text-white border-0 fw-bold">Sewa</button></a>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
+                        </a>
+                        </div> --}}
+                    @endforeach
                 </div>
-                </a>
-            </div>
-            @endforeach
             </div>
         </div>
 {{-- Other Vehicle end --}}
