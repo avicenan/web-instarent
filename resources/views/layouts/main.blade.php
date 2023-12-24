@@ -35,7 +35,7 @@
 
         <title>Instarent</title>
     </head>
-    <body>
+    <body style="background-color: #F7F7F7">
 
         @if (!(Route::is('home'))) 
             @include('partials.navbar')
@@ -46,6 +46,84 @@
                 @yield('container')
             </div>
         </div>
+
+        <!-- Footer -->
+  <footer style="background-color: #D8F3DC; min-height: 500px" class="mt-5">
+    <div class="row justify-content-center" style="background-color: #D8F3DC; max-width: 100%;">
+      <div class="row pt-4 px-5">
+        <div class="col-md">
+          <div class="d-flex">
+            <div class="row pt-3">
+              <a class="navbar-brand fw-bold" href="#" style="color: black;">
+                <img src="{{ asset('img/instarent-logo.png') }}" alt="" width="30" height="30" class="d-inline-block align-text-top">
+                Instarent
+              </a>
+              <p class="pt-4">Sangat puas menggunakan InstaRent. Proses pemesanan yang cepat dan mudah membuat perencanaan perjalanan jauh lebih nyaman. Layanan pelanggan yang responsif dan ramah</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="row pt-3 ">
+            <p class="navbar-brand fw-bold" href="#" style="color: black;">
+              Tentang Kami  
+            </p>
+            <div class="row row-cols-1 pt-2">
+              <div class="col pb-1"> 
+                <a href="" style="text-decoration: none; color: #4B4B4B;">Profil Perusahaan</a>
+              </div>
+              <div class="col">
+                <a href="" style="text-decoration: none; color: #4B4B4B;">Profil Pengembang</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="row pt-3">
+            <p class="navbar-brand fw-bold" href="#" style="color: black;">
+              FAQ
+            </p>
+            <div class="row row-cols-1 pt-2">
+              <div class="col pb-1"> 
+                <a href="" style="text-decoration: none; color: #4B4B4B;">Pertanyaan</a>
+              </div>
+              <div class="col pb-1">
+                <a href="" style="text-decoration: none; color: #4B4B4B;">Jawaban</a>
+              </div>
+              <div class="col">
+                <a href="" style="text-decoration: none; color: #4B4B4B;">Bantuan</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="row pt-3 ">
+            <p class="navbar-brand fw-bold" href="#" style="color: black;">
+              Kontak
+            </p>
+            <div class="row row-cols-1 pt-2 " >
+              <div class="col pb-1"> 
+                +62 812 1222 7772
+              </div>
+              <div class="col pb-1">
+                instasoulutiongroup2022 <span style="margin-left: -5px;">@gmail.com</span>
+              </div>
+              <div class="col pb-1">
+                Jl. Raya Bojongsoang Komplek PBB Ruko R-11 Lengkong, Lengkong, Kec.
+Bojongsoang, Kabupaten Bandung, Jawa Barat 40287
+              </div>
+              <div class="col ">
+                <a href="" class="pe-1"><img src="instagram.png" alt=""></a>
+                <a href="" class="pe-1"><img src="whatsapp.png" alt=""></a>
+                <a href="" class="pe-1"><img src="tiktok.png" alt=""></a>
+              </div>
+            </div> 
+          </div>
+        </div>
+      </div>
+    </div>
+</footer>
+<!-- Akhir Footer -->
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
             
         <script>
@@ -65,6 +143,8 @@
                 sessionStorage.setItem('scrollpos', window.scrollY);
             });
         </script>
+
+        @yield('scripts')
     
     </body>
 </html>

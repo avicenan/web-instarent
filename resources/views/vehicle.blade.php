@@ -13,7 +13,7 @@
             <div class="card border-2 border-warning"">
                 <div class="card-body">
                   <div class="row card-text align-items-center" id="date-range">
-                    <div class="col d-flex">
+                    <div class="col-8 d-flex">
                         <p class="p-0 m-0">{{ $start_date->toDayDateTimeString() }}</p>
                         <i data-feather="arrow-right" class="mx-4"></i>
                         <p class="p-0 m-0">{{ $end_date->toDayDateTimeString() }}</p>
@@ -36,69 +36,75 @@
     </div>
 {{-- Search Bar end --}}
 
+<div class="card p-4 mb-3 border-0 shadow-sm">
     <div class="row mb-4">
         
-{{-- Image start --}}
+        {{-- Image start --}}
+                <div class="col-md-6">
+                    <div class="thumbnail mb-3 text-center">
+                        @if ($vehicle->image)
+                            <img class="img-thumbnail border-0 img-fluid" src="{{ asset('/storage/' . $vehicle->image) }}" alt="" style="max-height: 250px">
+                        @else
+                            <img class="img-thumbnail border-0 img-fluid" src="/img/no-image.png" alt="" style="max-height: 250px">
+                        @endif
+                    </div>
+                    {{-- Button left --}}
+                    {{-- <div class="img-carousel d-flex flex-wrap justify-content-start">
+                        <img class="img-thumbnail img-fluid m-1" src="/img/stargizer.png" alt="" width="200px">
+                        <img class="img-thumbnail img-fluid m-1" src="/img/stargizer.png" alt="" width="200px">
+                        <img class="img-thumbnail img-fluid m-1" src="/img/stargizer.png" alt="" width="200px">
+                    </div> --}}
+                    {{-- Button right --}}
+                </div>
+        {{-- Image end --}}
+    
+        {{-- Specs start --}}
         <div class="col-md-6">
-            <div class="thumbnail mb-3 text-center"">
-                @if ($vehicle->image)
-                    <img class="img-thumbnail border-0 img-fluid" src="{{ asset('/storage/' . $vehicle->image) }}" alt="" style="max-height: 250px">
-                @else
-                    <img class="img-thumbnail border-0 img-fluid" src="/img/no-image.png" alt="" style="max-height: 250px">
-                @endif
-            </div>
-            {{-- Button left --}}
-            {{-- <div class="img-carousel d-flex flex-wrap justify-content-start">
-                <img class="img-thumbnail img-fluid m-1" src="/img/stargizer.png" alt="" width="200px">
-                <img class="img-thumbnail img-fluid m-1" src="/img/stargizer.png" alt="" width="200px">
-                <img class="img-thumbnail img-fluid m-1" src="/img/stargizer.png" alt="" width="200px">
-            </div> --}}
-            {{-- Button right --}}
-        </div>
-{{-- Image end --}}
-
-{{-- Specs start --}}
-<div class="col-md-6">
-    <div class="car-name">
-        <div class="title mb-3 d-flex flex-wrap justify-content-between align-items-center">
-            <h1 class="fsize-8 fweig-bold">{{ $vehicle->brand->name . " " . $vehicle->title }}</h1>
-        </div>
-        <div class="car-spec mb-2">
-            <div class="row">
-                <div class="col">
-                    <div class="item me-3 mb-4 pe-4 fsize-3">
-                        <i data-feather="user" class=" me-1 align-middle"></i> {{ $vehicle->capacity }} Kursi
-                    </div>
-                    <div class="item me-3 mb-4 pe-4 fsize-3">
-                        <i data-feather="sliders" class="me-1 align-middle"></i> {{ $vehicle->transmission->name }}
-                    </div>
+            <div class="car-name">
+                <div class="title mb-3 d-flex flex-wrap justify-content-between align-items-center">
+                    <h1 class="fsize-8 fweig-bold">{{ $vehicle->brand->name . " " . $vehicle->title }}</h1>
                 </div>
-                <div class="col">
-                    <div class="item me-3 mb-4 pe-4 fsize-3">
-                        <i data-feather="battery-charging" class="me-1 align-middle"></i> {{ $vehicle->power }} cc
-                    </div>
-                    <div class="item me-3 mb-4 pe-4 fsize-3">
-                        <span class="material-symbols-outlined">palette</span> {{ $vehicle->color }}
+                <div class="car-spec mb-2">
+                    <div class="row">
+                        <div class="col">
+                            <div class="item me-3 mb-4 pe-4 fsize-3">
+                                <i data-feather="user" class=" me-1 align-middle"></i> {{ $vehicle->capacity }} Kursi
+                            </div>
+                            <div class="item me-3 mb-4 pe-4 fsize-3">
+                                <i data-feather="sliders" class="me-1 align-middle"></i> {{ $vehicle->transmission->name }}
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="item me-3 mb-4 pe-4 fsize-3">
+                                <i data-feather="battery-charging" class="me-1 align-middle"></i> {{ $vehicle->power }} cc
+                            </div>
+                            <div class="item me-3 mb-4 pe-4 fsize-3">
+                                <span class="material-symbols-outlined">palette</span> {{ $vehicle->color }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-{{-- Specs end --}}
-
-{{-- Extras start --}}
+        {{-- Specs end --}}
+    
+        {{-- Extras start --}}
             <div class="extras">
                 <h2 class="fsize-5 fweig-semibold mb-3">Tambahan</h2>
                 <div class="row">
                     <div class="col">
-                        <p>{{ $vehicle->extras }}</p>
+                        @if ($vehicle->extras)
+                            <p>{{ $vehicle->extras }}</p>
+                        @else
+                            <p> - </p>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
-{{-- Extras end --}}
-
+        {{-- Extras end --}}
+    
     </div>
+</div>
     {{-- Details start --}}
     <div class="row mb-3">
         {{-- <ul class="nav justify-content-center">
@@ -142,7 +148,7 @@
     <div class="row mb-4">
         <div class="col">
             <div class="card"">
-                <div class="card-body">
+                <div class="card-body" id="reviews">
                   <h5 class="card-title fweig-bold mb-3">Ulasan</h5>
                   <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -180,61 +186,45 @@
             <div class="row">
                 <div class="col">
                     @foreach (($vehicles->where('title', '=', $vehicle->title)->where('id', '!=', $vehicle->id)) as $vehicle)
-                        <p>{{ $vehicle->plate_num }}</p>
-                        {{-- Make cards for other unit --}}
-                        {{-- <div class="col-md-3 mb-3 position-relative">
-                        <a href="/vehicles/{{ $vehicle->slug }}" class="text-decoration-none">
-                        <div class="card py-4 px-1 shadow border-0" style="min-width: 300px; border-radius:10px;">
-                            <div class="card-body">
-                            <div class="container text-center">
-                                <div class="row align-items-center justify-content-between">
-                                <div class="col-10 text-start">
-                                    <h4 class="card-title text-dark fweig-medium">{{ $vehicle["title"] }}</h4>
+                        <div class="col-12 col-md-6 col-xl-3">
+                            <div class="card shadow-sm mb-3 bg-body rounded border-0 p-3" style="max-height: 300px;">
+                            <div class="containers">
+                                <div class="row g-0">
+                                <div class="col-11 fw-bold">{{ $vehicle->brand->name . ' ' . $vehicle->title }}</div>
+                                <div class="col-1"><img src="Heart.png" style="cursor: pointer;"id="heart-G2"  alt=""></div>
                                 </div>
-                                <div class="col-2 text-end">
-                                    <span class="material-symbols-outlined txt-ntrl300">
-                                        favorite
-                                    </span>
+                                <div class="row">
+                                @if ($vehicle->image)
+                                    <img src="{{ asset('/storage/' . $vehicle->image) }}" style="
+                                    height: 140px;
+                                    object-fit:scale-down;
+                                    object-position: center;" alt="">
+                                @else
+                                    <img src="/img/no-image.png" style="
+                                    height: 140px;
+                                    object-fit:scale-down;
+                                    object-position: center;" alt="">
+                                @endif
                                 </div>
+                                <div class="row g-0 text-center d-flex justify-content-evenly" style="font-size: small;" >
+                                <div class="col d-flex align-items-center justify-content-center">
+                                    <span class="pt-"><i data-feather="sliders" class="feather-16"></i> {{ $vehicle->transmission->name }}</span>
                                 </div>
-                            </div>
-                            <img src="/img/stargizer.png" class="card-img-top mb-3" alt="...">
-                            <div class="container text-center mb-4 txt-ntrl500">
-                                <div class="row align-items-center">
-                                <div class="col d-flex align-items-center">
-                                    <span class="material-symbols-outlined me-2">
-                                        auto_transmission
-                                    </span>
-                                    <span style="font-size: 12px">{{ $vehicle->transmission }}</span>
+                                <div class="col d-flex align-items-center justify-content-center">
+                                    <span class="pt-"><i data-feather="user" class="feather-16"></i> {{ $vehicle->capacity }} orang</span>
                                 </div>
-                                <div class="col d-flex align-items-center">
-                                    <span class="material-symbols-outlined me-2">
-                                        person
-                                    </span>
-                                    <span style="font-size: 12px">{{ $vehicle->capacity }} Orang</span>
+                                <div class="col d-flex align-items-center justify-content-center">
+                                    <span class="pt-"><i class="material-symbols-outlined align-middle">palette</i> {{ $vehicle->color }}</span>
                                 </div>
-                                <div class="col d-flex align-items-center">
-                                    <span class="material-symbols-outlined me-2">
-                                        speed
-                                    </span>
-                                    <span style="font-size: 12px">{{ $vehicle->power }} cc</span>
+                                </div>   
+                                <div class="row mt-3 g-0">
+                                <div class="col text-end">
+                                    IDR {{ number_format($vehicle->price) }}/<span style="color: grey;">hari</span>
                                 </div>
-                                </div>
-                            </div>
-                            <div class="container text-center">
-                                <div class="row align-items-center justify-content-between">
-                                <div class="col-6 text-start">
-                                    <p class="my-auto fsize-4 fw-medium text-dark">Rp. {{ $vehicle->price }}/<span class="txt-ntrl500">hari</span></p>
-                                </div>
-                                <div class="col-4 text-end position-absolute" style="right: 29px">
-                                    <a href="/rent" class="p-0 m-0"><button class="px-3 py-2 rounded bg-ter1 text-white border-0 fw-bold">Sewa</button></a>
-                                </div>
-                                </div>
+                                </div>      
                             </div>
                             </div>
                         </div>
-                        </a>
-                        </div> --}}
                     @endforeach
                 </div>
             </div>
@@ -259,9 +249,6 @@ document.getElementById("exit-date-toggle").addEventListener("click",() =>
     }, false,
 );
 
-$("#filter :input").change(function() {
-   $("#filter").data("changed",true);
-});
 </script>
 
 @endsection

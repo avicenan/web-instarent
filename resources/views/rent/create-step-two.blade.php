@@ -8,12 +8,60 @@
     <input type="datetime-local" disabled value="{{ $end_date }}">
 </form> --}}
 
-
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div class="progress-bar" style="padding: 30px">
+            <div class="position-relative m-4" style="height: 20px">
+                <div class="progress" role="progressbar" aria-label="Progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="height: 1px;">
+                  <div class="progress-bar bg-success" style="width: 33%"></div>
+                </div>
+                <div class="row">
+                    <div class="col-3 position-absolute top-0" style="right: 85%">
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <button type="button" class="translate-middle btn btn-sm btn-success rounded-pill" style="width: 2rem; height:2rem;">1</button>
+                                <h6 class="me-4 fweig-reg" style="font-size: 1vw">Data Diri</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3 position-absolute top-0" style="right: 53%">
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <button type="button" class="translate-middle btn btn-sm btn-success rounded-pill border-0" style="width: 2rem; height:2rem;">2</button>
+                                <h6 class="me-4 fweig-reg" style="font-size: 1vw; ">Rincian Sewa</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3 position-absolute top-0" style="right: 18%">
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <button type="button" class="translate-middle btn btn-sm btn-secondary rounded-pill border-0" style="width: 2rem; height:2rem; background-color:lightgray">3</button>
+                                <h6 class="me-4 fweig-reg" style="font-size: 1vw;  color: lightgray">Syarat<br>dan Ketentuan</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3 position-absolute top-0" style="right: -15%">
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <button type="button" class="translate-middle btn btn-sm btn-secondary rounded-pill border-0" style="width: 2rem; height:2rem; background-color:lightgray">4</button>
+                                <h6 class="me-5 fweig-reg" style="font-size: 1vw; color: lightgray">Pembayaran</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- <button type="button" class="position-absolute top-0 translate-middle btn btn-sm btn-success rounded-pill" style="width: 2rem; height:2rem; right: 93%">1</button>
+                <button type="button" class="position-absolute top-0 translate-middle btn btn-sm btn-secondary rounded-pill" style="width: 2rem; height:2rem; right: 66%">2</button>
+                <button type="button" class="position-absolute top-0 translate-middle btn btn-sm btn-secondary rounded-pill" style="width: 2rem; height:2rem; right: 33%">3</button>
+                <button type="button" class="position-absolute top-0 translate-middle btn btn-sm btn-secondary rounded-pill" style="width: 2rem; height:2rem; right: -3%">4</button> --}}
+            </div>
+        </div>
+    </div>
+</div>
 
 <form action="{{ route('rent.create.step.two.post') }}" method="POST" enctype="multipart/form-data">
     @csrf
     
-    <div class="personal-data my-3 mt-4 border border-1 p-3 rounded-3">
+    <div class="personal-data my-3 mt-4 p-3 rounded-3 bg-white shadow-sm">
         <h5 class="fweig-bold fsize-7" id="step-title">Rincian Penyewaan</h5>
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -83,7 +131,7 @@
             </div>
             <div class="col-6">
                 <label for="ktp">Foto KTP</label>
-                <input type="file" class="form-control @error('ktp') is-invalid @enderror" name="ktp" id="ktp" value="{{ $rent->ktp ?? old('ktp') }}">
+                <input type="file" class="form-control @error('ktp') is-invalid @enderror" name="ktp" id="ktp" value="">
                 @error('ktp')
                     <div class="invalid-feedback">
                         {{ $message }}

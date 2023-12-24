@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rent;
+use App\Models\Status;
 use App\Http\Requests\StoreRentRequest;
 use App\Http\Requests\UpdateRentRequest;
 use App\Http\Controllers\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Vehicle;
+use Carbon\Carbon;
 
 class RentController extends Controller
 {
@@ -190,7 +192,7 @@ class RentController extends Controller
         // $request->session()->put('rent', $rent);
   
         // return redirect()->route('rent.create.step.three');
-        return $rent;
+        return redirect()->route('rent.create.step.three');
     }
   
     /**
@@ -206,6 +208,11 @@ class RentController extends Controller
             'title' => 'Sewa - Syarat dan Ketentuan',
             'vehicle' => session('vehicle'),
             'user' => Auth::user(),
+            'status_id' => Status::first(),
+            'duration' => session('duration')['day'],
+            'rent_price' => (session('duration')['day'])*(session('vehicle')->price),
+            'rent_fees' => session('rent_fees'),
+            'total_price' => session('rent_fees') + ((session('duration')['day'])*(session('vehicle')->price)),
             'rent' => $rent
         ]);
     }
@@ -216,39 +223,104 @@ class RentController extends Controller
      *
      */
     public function postCreateStepThree(Request $request)
-    {
+    {   
+        $rent = $request->session()->get('rent');
+        
         $validatedData = $request->validate([
-            'vehicle_id' => 'required'
+            'tnc' => 'required',
+            'total_price' => 'required',
+            'status_id' => 'required'
         ]);
 
-        $rent = new Rent;
         $rent->fill($validatedData);
-        $request->session()->put('rent', $rent);
+
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = config('midtrans.serverKey');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => rand(),
+                'gross_amount' => $rent->total_price,
+            ),
+            'customer_details' => array(
+                'first_name' => $rent->nama_lengkap,
+                'email' => Auth::user()->email,
+            ),
+        );
+        
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+        $rent->snap_token = $snapToken;
+
+        $rent->fill($validatedData);
+
+        $rent->save();
   
-        return redirect()->route('rent.create.step.four');
-        // return $validatedData['sim'];
+        // $request->session()->forget('rent');
+  
+        return redirect()->route('rent.create.checkout');
     }
     
-     public function createStepFour(Request $request)
+     public function createCheckout(Request $request)
     {
         $rent = $request->session()->get('rent');
+
+        $start_date = new Carbon($rent->start_date);
+        $end_date = new Carbon($rent->end_date);
   
-        return view('rent.create-step-four',compact('rent'));
+        return view('rent.create-checkout', [
+            'title' => 'Sewa - Checkout',
+            'user' => Auth::user(),
+            'vehicle' => session('vehicle'),
+            'status' => Status::findOrFail($rent->status_id),
+            'start_date' => $start_date,
+            'end_date' => $end_date,
+            'duration' => session('duration')['day'],
+            'rent_price' => (session('duration')['day'])*(session('vehicle')->price),
+            'rent_fees' => session('rent_fees'),
+            'total_price' => session('rent_fees') + ((session('duration')['day'])*(session('vehicle')->price)),
+            'rent' => $rent
+        ]);
+        // return $rent;
     }
   
-    /**
-     * Show the step One Form for creating a new product.
-     *
-     *
-     */
-    public function postCreateStepFour(Request $request)
-    {
-        $product = $request->session()->get('product');
-        $product->save();
+    public function success(Request $request)
+    {   
+        $rent = $request->session()->get('rent');
+
+        $rent->status_id = 2;
+        $rent->save();
+        $rent->forget();
+
+        // if (empty($rent->status_id && $rent->total_price)) {
+        //     $rent->status_id = $status_id[1];
+        //     $rent->total_price = $total_price;
+        // } else {
+        //     $rent->status_id = $rent->status_id;
+        //     $rent->total_price =$rent->total_price;
+        // }
+
+        $start_date = new Carbon($rent->start_date);
+        $end_date = new Carbon($rent->end_date);
   
-        $request->session()->forget('product');
-  
-        return redirect()->route('products.index');
+        return view('rent.create-checkout', [
+            'title' => 'Sewa - Checkout',
+            'user' => Auth::user(),
+            'vehicle' => session('vehicle'),
+            'status' => Status::findOrFail($rent->status_id),
+            'start_date' => $start_date,
+            'end_date' => $end_date,
+            'duration' => session('duration')['day'],
+            'rent_price' => (session('duration')['day'])*(session('vehicle')->price),
+            'rent_fees' => session('rent_fees'),
+            'total_price' => session('rent_fees') + ((session('duration')['day'])*(session('vehicle')->price)),
+            'rent' => $rent
+        ]);
     }
 
     public function cancel(Request $request)

@@ -39,7 +39,7 @@ class VehicleController extends Controller
         return view('vehicles', [
             "title" => "Katalog",
             "active" => "vehicles",
-            "vehicles" => Vehicle::latest()->filter(request(['search', 'brand', 'category', 'start_date', 'end_date']))->paginate(4)->withQueryString(),
+            "vehicles" => Vehicle::latest()->filter(request(['search', 'brand', 'category', 'type', 'start_date', 'end_date']))->paginate(4)->withQueryString(),
             "brands" => Brand::all(),
             "categories" => Category::all(),
             "types" => Type::all(),
@@ -81,7 +81,10 @@ class VehicleController extends Controller
             'start_date' => $start_date,
             'end_date' => $end_date,
             'vehicle' => $vehicle,
-            'rent_fee' => 5000
+            'rent_fees' => 5000,
+            'duration' => [
+                "day" => $end_date->day - $start_date->day
+            ]
         ]);
 
         return redirect('/rent/create-step-one');

@@ -128,6 +128,7 @@ class DashboardVehicleController extends Controller
     public function destroy(Vehicle $vehicle)
     {
         Vehicle::destroy($vehicle->id);
+
         return redirect('/dashboard/vehicles')->with('success', 'Kendaraan telah berhasil dihapus!');
     }
 

@@ -26,6 +26,12 @@ class Vehicle extends Model
             });
         });
 
+        $query->when($filters['type'] ?? false, function($query, $type) {
+            return $query->whereHas('type', function($query) use ($type) {
+                $query->where('slug', $type);
+            });
+        });
+
         $query->when($filters['category'] ?? false, function($query, $category) {
             return $query->whereHas('category', function($query) use ($category) {
                 $query->where('slug', $category);
@@ -39,7 +45,8 @@ class Vehicle extends Model
                 $query->from('rents')
                 ->select('vehicle_id')
                 ->where('start_date', '<', $form_end_date)
-                ->where('end_date', '>', $form_start_date);
+                ->where('end_date', '>', $form_start_date)
+                ->where('status_id', '=', 2);
             });
         });
 

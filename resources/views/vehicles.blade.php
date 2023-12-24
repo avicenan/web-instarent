@@ -9,8 +9,8 @@
             <p class="fw-medium fs-4 text-white lh-lg">Ayo, jangan lewatkan kesempatan ini<br>untuk menjelajahi destinasi favorit Anda<br>dengan kenyamanan dan kebebasan. <br>Sewa sekarang!
             </p>
         </div>
-        <div class="col-md-6">
-            <img src="" alt="mobil dan motor">
+        <div class="col-md-6 my-auto">
+            <img src="{{ asset('img/reserve-banner.png') }}" alt="mobil dan motor" id="reserve-banner" class="img-fluid">
         </div> 
     </div>
 </div>
@@ -47,9 +47,25 @@
   </div>
 </nav> --}}
 
-<div class="search-card bg-danger p-2 rounded-3 mb-3 mx-auto">
-  <form action="/vehicles#search" role="search" id="search">
+<div class="search-card bg-white p-2 rounded-3 mb-3 mx-auto shadow-sm">
+  <form action="/vehicles" role="search" id="search">
     @csrf
+    <div class="hidden-filter">
+      @if (request('start_date') || request('end_date')) 
+        <input type="hidden" name="start_date" value="{{ request('start_date') }}">
+        <input type="hidden" name="end_date" value="{{ request('end_date') }}">
+      @endif
+      @if (request('category')) 
+        <input type="hidden" name="category" value="{{ request('category') }}">
+      @endif
+      @if (request('type')) 
+        <input type="hidden" name="type" value="{{ request('type') }}">
+      @endif
+      @if (request('brand')) 
+        <input type="hidden" name="brand" value="{{ request('brand') }}">
+      @endif
+    </div>
+
     <div class="row m-1">
       <div class="col-12">
         <div class="form-floating my-3">
@@ -72,13 +88,13 @@
       </div>
       
       <div class="col-6">
-        <p class="text-light fweig-reg mt-1">{{ $start_date->toDayDateTimeString() }}</p>
+        <p class="text-dark fweig-reg mt-1">{{ $start_date->toDayDateTimeString() }}</p>
       </div>
       <div class="col-6">
-        <p class="text-light fweig-reg mt-1">{{ $end_date->toDayDateTimeString() }}</p>
+        <p class="text-dark fweig-reg mt-1">{{ $end_date->toDayDateTimeString() }}</p>
       </div>
       <div class="col-12">
-        <button type="submit" class="btn btn-warning w-100 mb-3">Cari</button>
+        <button type="submit" class="btn btn-light border-0 w-100 mb-3 bg-prim text-dark fweig-semibold shadow-sm"><i data-feather="search" class="me-3 feather-16"></i>Cari</button>
       </div>
     </div>
   </form>
@@ -146,41 +162,60 @@
 </div> --}}
 <div class="row" id="filter">
   <div class="col-lg-3 mb-4">
-    <div class="card h-100 p-3">
+    <div class="card border-0 shadow-sm h-100 p-3">
       <div class="card_body">
         <div class="filter-title row">
           <h5 class="card-title fweig-semibold col">Filter <i data-feather="filter" class="feather-16"></i></h5>
-          <a href="/vehicles" class="text-primary text-end fsize-2 col">Clear All Filters</a>
+          <a href="/vehicles" class="text-primary text-end fsize-1 col">Clear All</a>
         </div>
         <hr>
         <form action="/vehicles" id="filter">
           @csrf
-          @if (request('search')) 
-            <input type="hidden" name="search" value="{{ request('search') }}">
-          @endif
+          <div class="hidden-filter">
+            @if (request('search')) 
+              <input type="hidden" name="search" value="{{ request('search') }}">
+            @endif
+            @if (request('start_date') || request('end_date')) 
+              <input type="hidden" name="start_date" value="{{ request('start_date') }}">
+              <input type="hidden" name="end_date" value="{{ request('end_date') }}">
+            @endif
+            @if (request('category')) 
+              <input type="hidden" name="category" value="{{ request('category') }}">
+            @endif
+            @if (request('type')) 
+              <input type="hidden" name="type" value="{{ request('type') }}">
+            @endif
+            @if (request('brand')) 
+              <input type="hidden" name="brand" value="{{ request('brand') }}">
+            @endif
+          </div>
+
+
           <div class="category mb-3">
             <p class="card-text my-2 p-0 fsize-4 fweig-semibold">Kategori</p>
-            <button class="btn btn-outline-dark me-1 mb-1 fsize-2 rounded-1 {{ request('category') == null ? 'active' : '' }}" value="" name="category">All</button>
+            <button class="btn btn-outline-secondary me-1 mb-1 fsize-2 rounded-1 {{ request('category') == null ? 'active' : '' }}" value="" name="category">All</button>
             @foreach($categories as $category)
-              <button class="btn btn-outline-dark me-1 mb-1 fsize-2 rounded-1 {{ request('category') == $category->slug? 'active' : '' }}" value="{{ $category->slug }}" name="category">{{ $category->name }}</button>
+              <button class="btn btn-outline-secondary me-1 mb-1 fsize-2 rounded-1 {{ request('category') == $category->slug? 'active' : '' }}" value="{{ $category->slug }}" name="category">{{ $category->name }}</button>
             @endforeach
           </div>
+
           <div class="type mb-3">
             <p class="card-text mb-2 p-0 fsize-4 fweig-semibold">Tipe</p>
-            <button class="btn btn-outline-dark me-1 mb-1 fsize-2 rounded-1 {{ request('type') == null ? 'active' : '' }}" value="" name="type">All</button>
+            <button class="btn btn-outline-secondary me-1 mb-1 fsize-2 rounded-1 {{ request('type') == null ? 'active' : '' }}" value="" name="type">All</button>
             @foreach($types as $type)
-              <button class="btn btn-outline-dark me-1 mb-1 fsize-2 rounded-1 {{ request('type') == $type->slug? 'active' : '' }}" value="{{ $type->slug }}" name="type">{{ $type->name }}</button>
+              <button class="btn btn-outline-secondary me-1 mb-1 fsize-2 rounded-1 {{ request('type') == $type->slug? 'active' : '' }}" value="{{ $type->slug }}" name="type">{{ $type->name }}</button>
             @endforeach
           </div>
           <div class="brands mb-3">
             <p class="card-text mb-2 p-0 fsize-4 fweig-semibold">Merek</p>
-            <button class="btn btn-outline-dark me-1 mb-1 fsize-2 rounded-1 {{ request('brand') == null ? 'active' : '' }}" value="" name="brand">All</button>
+            <button class="btn btn-outline-secondary me-1 mb-1 fsize-2 rounded-1 {{ request('brand') == null ? 'active' : '' }}" value="" name="brand">All</button>
             @foreach($brands as $brand)
-              <button class="btn btn-outline-dark me-1 mb-1 fsize-2 rounded-1 {{ request('brand') == $brand->name ? 'active' : '' }}" value="{{ $brand->name }}" name="brand">{{ $brand->name }}</button>
+              <button class="btn btn-outline-secondary me-1 mb-1 fsize-2 rounded-1 {{ request('brand') == $brand->slug ? 'active' : '' }}" value="{{ $brand->slug }}" name="brand">{{ $brand->name }}</button>
             @endforeach
           </div>
         </form>
       </div>
+    <button class="btn bg-prim btn-light text-dark sticky-md-bottom shadow-sm" style="bottom: 20px" type="submit" >Terapkan</button>
     </div>
   </div>
 {{-- Filters Cards end --}}
@@ -192,43 +227,43 @@
         <h6 class="text-center p-4 my-5">Mohon maaf kendaraan yang anda cari belum tersedia</h6>
         <div style="min-height: 50vh"></div>
         @else
-      <h5 class="fweig-semibold">{{ count($vehicles->unique('title')) }} kendaraan tersedia</h5>
+      <h5 class="fweig-semibold fsize-6">Menampilkan {{ count($vehicles->unique('title')) }} kendaraan tersedia</h5>
       @foreach ($vehicles->unique('title') as $vehicle)
-      <div class="card mb-3">
+      <div class="card shadow-sm border-0 mb-3">
         <div class="row g-0">
           <div class="col-md-3 my-auto text-center p-2">
             @if ($vehicle->image)
-              <img src="{{ asset('/storage/' . $vehicle->image) }}" class="img-fluid" alt="..." >
+              <img src="{{ asset('/storage/' . $vehicle->image) }}" class="img-fluid" alt="..." style="max-height: 190px">
             @else
               <img src="/img/no-image.png" class="img-fluid" alt="..." style="max-height: 160px">
             @endif
           </div>
           <div class="col-md-9">
             <div class="card-body row">
-              <div class="col-md-8">
-                <h5 class="card-title fweig-bold mb-3">{{ $vehicle->brand->name . " " . $vehicle->title }} <span class="font-monospace fsize-1 fweig-reg">atau sejenis</span> </h5>
+              <div class="col-sm-8">
+                <h5 class="card-title fsize-6  fweig-bold mb-3">{{ $vehicle->brand->name . " " . $vehicle->title }} <span class="font-monospace fsize-1 fweig-reg">atau sejenis</span> </h5>
                 <div class="vehicle-spec card-text">
                   <div class="row">
                     <div class="col">
-                      <div class="item me-3 mb-4 pe-4 fsize-3">
+                      <div class="item me-3 mb-4 pe-4 fsize-2">
                         <i data-feather="user" class=" me-1 align-middle"></i> {{ $vehicle->capacity }} Kursi
                       </div>
-                      <div class="item me-3 mb-4 pe-4 fsize-3">
+                      <div class="item me-3 mb-4 pe-4 fsize-2">
                           <i data-feather="sliders" class="me-1 align-middle"></i> {{ $vehicle->transmission->name }}
                       </div>
                     </div>
                     <div class="col">
-                      <div class="item me-3 mb-4 pe-4 fsize-3">
+                      <div class="item me-3 mb-4 pe-4 fsize-2">
                         <i data-feather="battery-charging" class="me-1 align-middle"></i> {{ $vehicle->power }} cc
                       </div>
-                      <div class="item me-3 mb-4 pe-4 fsize-3">
-                          <span class="material-symbols-outlined">palette</span> {{ $vehicle->color }}
+                      <div class="item me-3 mb-4 pe-4 fsize-2">
+                          <i class="material-symbols-outlined align-middle">palette</i> {{ $vehicle->color }}
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-md-4 text-end mt-3">
+              <div class="col-sm-4 text-end mt-3">
                 <p class="card-text fsize-2 m-0"><small class="text-body-primary">Harga untuk {{ $duration['day'] }} hari:</small></p>
                 <h5>IDR {{ number_format(($vehicle->price)*$duration["day"], 0) }} </h5>
                 <a href="/vehicles/{{ $vehicle->slug }}" class="btn btn-success fweig-semibold">Sewa</a>
@@ -244,13 +279,16 @@
             </div>
           </div>
           <div class="card bg-prim border-0 m-2" style="border-radius: 7px 7px 7px 0px; max-width: 48px"">
-            <div class="card-body p-1 my-auto d-flex align-content-center justify-content-center" title="Nilai">
-              <h6 class="text-dark fweig-semibold m-auto">4.6</h6>
-            </div>
+            <a href="/vehicle/{{ $vehicle->slug }}/#reviews" class="text-decoration-none my-auto">
+              <div class="card-body p-1 my-auto d-flex align-content-center justify-content-center" title="Nilai">
+                <h6 class="text-dark fweig-semibold m-auto">4.6</h6>
+              </div>
+            </a>
           </div>
         </div>
       </div>
       @endforeach
+      
       @endif
     </div>
   </div>
@@ -262,9 +300,6 @@
 <div class="d-flex justify-content-center">
   {{ $vehicles->links() }}
 </div>
-
-
-<a href="/home" class="my-auto">to home</a>
 
 @if ( (! request('start_date') || (! request('end_date'))) ) // not submitted yet
 <script>

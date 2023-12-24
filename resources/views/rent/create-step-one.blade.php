@@ -9,6 +9,56 @@
     </form>
 </div>
 
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div class="progress-bar" style="padding: 30px">
+            <div class="position-relative m-4" style="height: 20px">
+                <div class="progress" role="progressbar" aria-label="Progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="height: 1px;">
+                  <div class="progress-bar" style="width: 0%"></div>
+                </div>
+                <div class="row">
+                    <div class="col-3 position-absolute top-0" style="right: 85%">
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <button type="button" class="translate-middle btn btn-sm btn-success rounded-pill" style="width: 2rem; height:2rem;">1</button>
+                                <h6 class="me-4 fweig-reg" style="font-size: 1vw">Data Diri</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3 position-absolute top-0" style="right: 53%">
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <button type="button" class="translate-middle btn btn-sm btn-secondary rounded-pill border-0" style="width: 2rem; height:2rem; background-color:lightgray">2</button>
+                                <h6 class="me-4 fweig-reg" style="font-size: 1vw; color: lightgray">Rincian Sewa</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3 position-absolute top-0" style="right: 18%">
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <button type="button" class="translate-middle btn btn-sm btn-secondary rounded-pill border-0" style="width: 2rem; height:2rem; background-color:lightgray">3</button>
+                                <h6 class="me-4 fweig-reg" style="font-size: 1vw;  color: lightgray">Syarat<br>dan Ketentuan</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3 position-absolute top-0" style="right: -15%">
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <button type="button" class="translate-middle btn btn-sm btn-secondary rounded-pill border-0" style="width: 2rem; height:2rem; background-color:lightgray">4</button>
+                                <h6 class="me-5 fweig-reg" style="font-size: 1vw; color: lightgray">Pembayaran</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- <button type="button" class="position-absolute top-0 translate-middle btn btn-sm btn-success rounded-pill" style="width: 2rem; height:2rem; right: 93%">1</button>
+                <button type="button" class="position-absolute top-0 translate-middle btn btn-sm btn-secondary rounded-pill" style="width: 2rem; height:2rem; right: 66%">2</button>
+                <button type="button" class="position-absolute top-0 translate-middle btn btn-sm btn-secondary rounded-pill" style="width: 2rem; height:2rem; right: 33%">3</button>
+                <button type="button" class="position-absolute top-0 translate-middle btn btn-sm btn-secondary rounded-pill" style="width: 2rem; height:2rem; right: -3%">4</button> --}}
+            </div>
+        </div>
+    </div>
+</div>
+
 {{-- <div class="my-3">
     <a href="/vehicles/{{ $vehicle->slug }}" class="fweig-medium text-danger" onclick="return confirm('apakah ingin membatalkan penyewaan?')"><i data-feather="arrow-left"></i> Batalkan</a>
 </div> --}}
@@ -23,9 +73,9 @@
 <form action="{{ route('rent.create.step.one.post') }}" method="POST">
     @csrf
     
-    <div class="personal-data my-3 mt-4 border border-1 p-3 rounded-3">
+    <div class="shadow-sm personal-data my-3 mt-4 p-3 rounded-3 bg-white">
         <h5 class="fweig-bold fsize-7">Data Diri</h5>
-        @if ($errors->any())
+        {{-- @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -33,7 +83,7 @@
                     @endforeach
                 </ul>
             </div>
-        @endif
+        @endif --}}
         <div class="row g-4 my-3">
             <div class="col-6" hidden>
                 <label for="user_id">User</label>
@@ -159,8 +209,4 @@
     </div>
 </form>
 
-
-<script>
-
-</script>
 @endsection

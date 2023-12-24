@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rent;
+use App\Models\Status;
 use Illuminate\Http\Request;
 
 class DashboardRentController extends Controller
@@ -10,10 +11,11 @@ class DashboardRentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         return view('dashboard.rents.index', [
-            'rents' => Rent::all()
+            'rents' => Rent::latest()->filter(request(['status']))->paginate(4)->withQueryString(),
+            'status' => Status::all(),
         ]);
     }
 

@@ -11,6 +11,7 @@ use \App\Models\Category;
 use \App\Models\Type;
 use \App\Models\Transmission;
 use App\Models\Rent;
+use App\Models\Status;
 
 class DatabaseSeeder extends Seeder
 {
@@ -229,11 +230,55 @@ class DatabaseSeeder extends Seeder
             'extras' => 'Kursi bayi, bantal duduk, pelindung kaca',
         ]);
 
-        Rent::create([
-            'user_id' => 1,
-            'vehicle_id' => 1,
-            'start_date' => '2023-11-23 07:30',
-            'end_date' => '2023-11-24 07:30'
+        // Renting
+
+        // Rent::create([
+        //     'user_id' => 1,
+        //     'vehicle_id' => 1,
+        //     'start_date' => '2023-11-23 07:30',
+        //     'end_date' => '2023-11-24 07:30'
+        // ]);
+
+        // Rent Status
+
+        Status::create([
+            'name' => 'Unpaid',
+            'slug' => 'unpaid'
+        ]);
+
+        Status::create([
+            'name' => 'Booked',
+            'slug' => 'booked'
+        ]);
+
+        Status::create([
+            'name' => 'Confirmed',
+            'slug' => 'confirmed'
+        ]);
+
+        Status::create([
+            'name' => 'On Rent',
+            'slug' => 'on-rent'
+        ]);
+
+        Status::create([
+            'name' => 'Done',
+            'slug' => 'done'
+        ]);
+
+        Status::create([
+            'name' => 'Canceled',
+            'slug' => 'canceled'
+        ]);
+
+        Status::create([
+            'name' => 'Late Return',
+            'slug' => 'late-return'
+        ]);
+
+        Status::create([
+            'name' => 'Issued',
+            'slug' => 'issued'
         ]);
             
     }

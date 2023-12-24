@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('vehicle_id');
+            $table->foreignId('status_id')->default(1);
             
             // Personal identity
             $table->string('nama_lengkap');
@@ -40,8 +41,11 @@ return new class extends Migration
             $table->string('sim');
             $table->string('ktm')->nullable();
 
-            $table->string('status')->default('Booked');
-            $table->string('payment_status')->default('Unpaid');
+            // Terms and Condiiton
+            $table->string('tnc');
+
+            $table->integer('total_price');
+            $table->string('snap_token')->nullable();
             $table->timestamps();
 
         });

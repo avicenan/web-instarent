@@ -97,6 +97,10 @@ body {
 .bg-green7 {
     background-color: var(--green7-color);
 }
+
+.bg-neutral500 {
+    background-color: var(--neutral500-color);
+}
 /* End BG Colors */
 
 /* Fonts */
@@ -235,6 +239,14 @@ a {
 }
 
 @media (max-width: 990px) {
+    #stepper {
+        display: none;
+    }
+
+    #benefits-img {
+        display: none;
+    }
+
     .page-container {
         margin-top: 5rem;
     }
@@ -261,6 +273,12 @@ a {
     }
 
     .card-sale {
+        display: none;
+    }
+}
+
+@media (max-width: 770px) {
+    #reserve-banner {
         display: none;
     }
 }

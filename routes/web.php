@@ -109,3 +109,9 @@ Route::post('rent/create-step-two', [RentController::class , 'postCreateStepTwo'
 Route::get('rent/create-step-three', [RentController::class , 'createStepThree'])->name('rent.create.step.three')->middleware('auth');
 Route::post('rent/create-step-three', [RentController::class , 'postCreateStepThree'])->name('rent.create.step.three.post')->middleware('auth');
 
+Route::get('rent/create-checkout', [RentController::class , 'createCheckout'])->name('rent.create.checkout')->middleware('auth');
+Route::get('rent/success', [RentController::class , 'success'])->name('rent.success')->middleware('auth');
+
+Route::get('/profile', function() {
+    return view('profile');
+});

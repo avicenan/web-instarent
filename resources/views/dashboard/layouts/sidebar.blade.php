@@ -21,6 +21,12 @@
         </a>
       </li>
       <li class="mx-3 mt-4 mb-2 sidebar-heading" >LAINNYA</li>
+      <li class="nav-item">
+        <a class="nav-link {{ Request::is('dashboard/account') ? 'active' : '' }}" href="/dashboard/vehicles">
+          <i data-feather="user"></i>
+          Akun
+        </a>
+      </li>
     </ul>
   </div>
 </nav>
