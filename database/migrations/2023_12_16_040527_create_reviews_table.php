@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('rent_id');
+            $table->integer('rating');
+            $table->string('review');
             $table->timestamps();
         });
     }

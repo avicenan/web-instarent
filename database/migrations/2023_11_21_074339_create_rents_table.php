@@ -25,10 +25,10 @@ return new class extends Migration
             $table->string('username_instagram');
             $table->string('pekerjaan');
             $table->string('universitas');
-            $table->integer('nim');
+            $table->string('nim');
             $table->string('jurusan');
             $table->string('id_line')->nullable();
-            $table->integer('angkatan');
+            $table->string('angkatan');
             $table->string('kelas');
 
 
@@ -42,9 +42,9 @@ return new class extends Migration
             $table->string('ktm')->nullable();
 
             // Terms and Condiiton
-            $table->string('tnc');
+            $table->string('tnc')->default('disagree');
 
-            $table->integer('total_price');
+            $table->integer('total_price')->nullable();
             $table->string('snap_token')->nullable();
             $table->timestamps();
 

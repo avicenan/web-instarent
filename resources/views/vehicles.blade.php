@@ -3,7 +3,7 @@
 @section('container')
 {{-- Hero start --}}
 <div class="container-fluid mb-3 mt-4">
-    <div class="hero p-5 row rounded-5" style="
+    <div class="hero p-5 row rounded-5 shadow-smfsm" style="
     background: linear-gradient(180deg, #FFD53E 35%, #AFC760 58.44%, hsl(152, 41%, 52%) 100%);">
         <div class="col-md-6">
             <p class="fw-medium fs-4 text-white lh-lg">Ayo, jangan lewatkan kesempatan ini<br>untuk menjelajahi destinasi favorit Anda<br>dengan kenyamanan dan kebebasan. <br>Sewa sekarang!
@@ -102,64 +102,6 @@
 {{-- Search end --}}
 
 {{-- Filters Cards start --}}
-{{-- <div class="container-fluid" style="padding: 0 10%">
-  <div class="row justify-between">
-  @foreach ($vehicles as $vehicle)
-    <div class="col-md-3 mb-3 position-relative">
-      <a href="/vehicles/{{ $vehicle->slug }}" class="text-decoration-none">
-        <div class="card py-4 px-1 shadow border-0" style="min-width: 300px; border-radius:10px;">
-          <div class="card-body">
-            <div class="container text-center">
-              <div class="row align-items-center justify-content-between">
-                <div class="col-10 text-start">
-                  <h4 class="card-title text-dark fweig-medium fsize-6">{{  $vehicle->brand->name . " " . $vehicle->title }}</h4>
-                </div>
-                <div class="col-2 text-end">
-                  <span class="material-symbols-outlined txt-ntrl300">
-                      favorite
-                  </span>
-                </div>
-              </div>
-            </div>
-            <img src="/img/stargizer.png" class="card-img-top img-fluid mb-3" alt="...">
-            <div class="container text-center mb-4 txt-ntrl500">
-              <div class="row align-items-center">
-                <div class="col d-flex align-items-center">
-                  <span class="material-symbols-outlined me-2">
-                      auto_transmission
-                  </span>
-                  <span style="font-size: 12px">{{ $vehicle->transmission }}</span>
-                </div>
-                <div class="col d-flex align-items-center">
-                  <span class="material-symbols-outlined me-2">
-                      person
-                  </span>
-                  <span style="font-size: 12px">{{ $vehicle->capacity }} Orang</span>
-                </div>
-                <div class="col d-flex align-items-center">
-                  <span class="material-symbols-outlined me-2">
-                      speed
-                  </span>
-                  <span style="font-size: 12px">{{ $vehicle->power }} cc</span>
-                </div>
-              </div>
-            </div>
-            <div class="container text-center">
-              <div class="row align-items-center justify-content-between">
-                <div class="col-6 text-start">
-                  <p class="my-auto fsize-4 fw-medium text-dark">Rp. {{ $vehicle->price }}/<span class="txt-ntrl500">hari</span></p>
-                </div>
-                <div class="col-4 text-end position-absolute" style="right: 29px">
-                  <button class="px-3 py-2 rounded bg-ter1 text-white border-0 fw-bold">Sewa</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </a>
-    </div>
-  @endforeach
-</div> --}}
 <div class="row" id="filter">
   <div class="col-lg-3 mb-4">
     <div class="card border-0 shadow-sm h-100 p-3">
@@ -215,7 +157,7 @@
           </div>
         </form>
       </div>
-    <button class="btn bg-prim btn-light text-dark sticky-md-bottom shadow-sm" style="bottom: 20px" type="submit" >Terapkan</button>
+    <button class="btn btn-secondary border-0 text-light shadow-sm" type="submit" >Terapkan</button>
     </div>
   </div>
 {{-- Filters Cards end --}}
@@ -229,7 +171,7 @@
         @else
       <h5 class="fweig-semibold fsize-6">Menampilkan {{ count($vehicles->unique('title')) }} kendaraan tersedia</h5>
       @foreach ($vehicles->unique('title') as $vehicle)
-      <div class="card shadow-sm border-0 mb-3">
+      <div class="card rounded-4 shadow-sm border-0 mb-3 p-2">
         <div class="row g-0">
           <div class="col-md-3 my-auto text-center p-2">
             @if ($vehicle->image)
@@ -248,7 +190,7 @@
                       <div class="item me-3 mb-4 pe-4 fsize-2">
                         <i data-feather="user" class=" me-1 align-middle"></i> {{ $vehicle->capacity }} Kursi
                       </div>
-                      <div class="item me-3 mb-4 pe-4 fsize-2">
+                      <div class="item me-3 mb-2 pe-4 fsize-2">
                           <i data-feather="sliders" class="me-1 align-middle"></i> {{ $vehicle->transmission->name }}
                       </div>
                     </div>
@@ -256,17 +198,17 @@
                       <div class="item me-3 mb-4 pe-4 fsize-2">
                         <i data-feather="battery-charging" class="me-1 align-middle"></i> {{ $vehicle->power }} cc
                       </div>
-                      <div class="item me-3 mb-4 pe-4 fsize-2">
+                      <div class="item me-3 mb-2 pe-4 fsize-2">
                           <i class="material-symbols-outlined align-middle">palette</i> {{ $vehicle->color }}
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-sm-4 text-end mt-3">
+              <div class="col-sm-4 text-end mt-4">
                 <p class="card-text fsize-2 m-0"><small class="text-body-primary">Harga untuk {{ $duration['day'] }} hari:</small></p>
                 <h5>IDR {{ number_format(($vehicle->price)*$duration["day"], 0) }} </h5>
-                <a href="/vehicles/{{ $vehicle->slug }}" class="btn btn-success fweig-semibold">Sewa</a>
+                <a href="/vehicles/{{ $vehicle->slug }}" class="btn btn-success fweig-semibold rounded-3 p-1 px-2 fsize-3">Sewa</a>
               </div>
             </div>
           </div>
@@ -275,13 +217,23 @@
         <div class="row g-0 others">
           <div class="card m-2" style="max-width: 48px">
             <div class="card-body p-1 text-center">
-              <img src="/img/car-brand-1.png" class="img-fluid" alt="{{ $vehicle->brand->name }}" width="64px" title="{{ $vehicle->brand->name }}">
+              <img src="img/{{ $vehicle->brand->slug }}.png" class="img-fluid" alt="{{ $vehicle->brand->name }}" width="64px"b title="{{ $vehicle->brand->name }}">
             </div>
           </div>
           <div class="card bg-prim border-0 m-2" style="border-radius: 7px 7px 7px 0px; max-width: 48px"">
             <a href="/vehicle/{{ $vehicle->slug }}/#reviews" class="text-decoration-none my-auto">
               <div class="card-body p-1 my-auto d-flex align-content-center justify-content-center" title="Nilai">
-                <h6 class="text-dark fweig-semibold m-auto">4.6</h6>
+                @if (count($vehicle->rent) >= 1 )
+                  @foreach($vehicle->rent as $rent)
+                    @if ($rent->review)
+                    <span class="text-dark fweig-semibold" >{{ number_format($rent->review->sum('rating'), 1) }}</span>
+                    @else
+                    <span class="text-dark fweig-semibold">.</span>
+                    @endif
+                  @endforeach
+                @else
+                  <span class="text-dark fweig-semibold">.</span>
+                @endif
               </div>
             </a>
           </div>
@@ -293,6 +245,7 @@
     </div>
   </div>
 </div>
+
 
 {{-- Cards end --}}
 

@@ -15,10 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('fname');
             $table->string('lname');
+            $table->string('username')->unique()->nullable();
             $table->string('telpNum');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('usertype')->nullable();
+            $table->string('usertype')->default('customer');
+            $table->string('image')->default('profile-photo/no-profile.png');
             $table->timestamps();
         });
     }

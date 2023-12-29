@@ -132,7 +132,7 @@
             </div>
             <div class="col-6">
                 <label for="telp_num">No. Hp / WhatsApp</label>
-                <input type="number" class="form-control @error('telp_num') is-invalid @enderror" id="telp_num" name="telp_num" value="{{ $rent->telp_num ?? old('telp_num') }}">
+                <input type="text" class="form-control @error('telp_num') is-invalid @enderror" id="telp_num" name="telp_num" value="{{ $rent->telp_num ?? old('telp_num') }}">
                 @error('telp_num')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -141,7 +141,7 @@
             </div>
             <div class="col-6">
                 <label for="nim">NIM</label>
-                <input type="number" class="form-control @error('nim') is-invalid @enderror" id="nim" name="nim" value="{{ $rent->nim ?? old('nim') }}">
+                <input type="text" class="form-control @error('nim') is-invalid @enderror" id="nim" name="nim" value="{{ $rent->nim ?? old('nim') }}">
                 @error('nim')
                     <div class="invalid-feedback">
                         {{ $message }}

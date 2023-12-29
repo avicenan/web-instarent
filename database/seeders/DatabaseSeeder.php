@@ -22,11 +22,52 @@ class DatabaseSeeder extends Seeder
     {
         User::create([
             'fname' => 'Admin',
-            'lname' => 'Andri',
+            'lname' => 'Avicena',
             'telpNum' => '082100001111',
-            'email' => 'admin@email.com',
+            'email' => 'avicena@email.com',
             'password' => '12345678',
-            'usertype' => 'admin'
+            'usertype' => 'admin',
+            'image' => 'profile-photo/no-photo.png'
+        ]);
+
+        User::create([
+            'fname' => 'Admin',
+            'lname' => 'Akmal',
+            'telpNum' => '082100001112',
+            'email' => 'akmal@email.com',
+            'password' => '12345678',
+            'usertype' => 'admin',
+            'image' => 'profile-photo/no-photo.png'
+        ]);
+
+        User::create([
+            'fname' => 'Admin',
+            'lname' => 'Aksa',
+            'telpNum' => '082100001113',
+            'email' => 'aksa@email.com',
+            'password' => '12345678',
+            'usertype' => 'admin',
+            'image' => 'profile-photo/no-photo.png'
+        ]);
+
+        User::create([
+            'fname' => 'Admin',
+            'lname' => 'Zahra',
+            'telpNum' => '082100001111',
+            'email' => 'zahra@email.com',
+            'password' => '12345678',
+            'usertype' => 'admin',
+            'image' => 'profile-photo/no-photo.png'
+        ]);
+
+        User::create([
+            'fname' => 'Admin',
+            'lname' => 'Kirana',
+            'telpNum' => '082100001111',
+            'email' => 'kirana@email.com',
+            'password' => '12345678',
+            'usertype' => 'admin',
+            'image' => 'profile-photo/no-photo.png'
         ]);
         
         // Brand
@@ -243,43 +284,47 @@ class DatabaseSeeder extends Seeder
 
         Status::create([
             'name' => 'Unpaid',
-            'slug' => 'unpaid'
+            'slug' => 'unpaid',
+            'color' => '#9FA6B2'
         ]);
 
         Status::create([
             'name' => 'Booked',
-            'slug' => 'booked'
+            'slug' => 'booked',
+            'color' => '#E4A11B'
         ]);
 
         Status::create([
             'name' => 'Confirmed',
-            'slug' => 'confirmed'
+            'slug' => 'confirmed',
+            'color' => '#54B4D3'
         ]);
 
         Status::create([
             'name' => 'On Rent',
-            'slug' => 'on-rent'
+            'slug' => 'on-rent',
+            'color' => '#3B71CA'
         ]);
 
         Status::create([
             'name' => 'Done',
-            'slug' => 'done'
+            'slug' => 'done',
+            'color' => '#14A44D'
         ]);
 
         Status::create([
             'name' => 'Canceled',
-            'slug' => 'canceled'
-        ]);
-
-        Status::create([
-            'name' => 'Late Return',
-            'slug' => 'late-return'
+            'slug' => 'canceled',
+            'color' => '#DC4C64'
         ]);
 
         Status::create([
             'name' => 'Issued',
-            'slug' => 'issued'
+            'slug' => 'issued',
+            'color' => '#332D2D'
         ]);
+
+        // Rent
             
     }
 }

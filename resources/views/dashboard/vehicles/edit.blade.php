@@ -7,7 +7,7 @@
 
 <div class="col-lg-8">
   <a href="/dashboard/vehicles" class="btn btn-success mx-1 mb-3"><i data-feather="arrow-left"></i> Kembali ke Halaman Kendaraan</a>
-  <form method="post" action="/dashboard/vehicles/{{ $vehicle->slug }}">
+  <form method="post" action="/dashboard/vehicles/{{ $vehicle->slug }}" enctype="multipart/form-data">
       @method('put')
       @csrf
       <div class="mb-3">
@@ -146,8 +146,23 @@
         @enderror
       </div>
       <div class="mb-3">
+        <label for="image" class="form-label">Foto Mobil</label>
+        <input type="hidden" name="oldImage" value="{{ $vehicle->image }}">
+        @if ($vehicle->image)
+          <img src="{{ asset('storage/' . $vehicle->image) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block img-thumbnail">
+        @else
+          <img class="img-preview img-fluid mb-3 col-sm-5">
+        @endif
+        <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image" onchange="previewImage()">
+        @error('image')
+          <div class="invalid-feedback">
+            {{ $message }}
+          </div>
+        @enderror
+      </div>
+      <div class="mb-3">
         <label for="extras" class="form-label">Tambahan</label>
-        <textarea class="form-control @error('extras') is-invalid @enderror" id="extras" name="extras" rows="3" value={{ old('extras', $vehicle->extras) }}></textarea>
+        <input type="text" class="form-control @error('extras') is-invalid @enderror" id="extras" name="extras" rows="3" value={{ old('extras', $vehicle->extras) }}>
         <div id="extrasHelp" class="form-text">Isi spesifikasi atau item tambahan</div>
       </div>
       
@@ -156,6 +171,19 @@
 </div>
 
 <script>
+  function previewImage() {
+      const image = document.querySelector('#image');
+      const imgPreview = document.querySelector('.img-preview');
 
+      imgPreview.style.display = 'block';
+      imgPreview.classList.add('img-thumbnail');
+
+      const oFReader = new FileReader();
+      oFReader.readAsDataURL(image.files[0]);
+
+      oFReader.onload = function(oFREvent) {
+        imgPreview.src = oFREvent.target.result;
+      }
+    }
 </script>
 @endsection

@@ -9,13 +9,15 @@ use App\Models\Transmission;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Facades\Storage;
 class DashboardVehicleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {
+    {   
+
         return view('dashboard.vehicles.index', [
             'vehicles' => Vehicle::all()
         ]);
@@ -107,7 +109,8 @@ class DashboardVehicleController extends Controller
             'power' => 'required',
             'price' => 'required',
             'plate_num' => 'required',
-            'color' => 'required'
+            'color' => 'required',
+            'image' => 'required|image|file|max:5120'
         ];
 
         // if($request->slug != $vehicle->slug) {
@@ -115,6 +118,13 @@ class DashboardVehicleController extends Controller
         // }
 
         $validatedData = $request->validate($rules);
+
+        if($request->file('image')) {
+            if($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            $validatedData['image'] = $request->file('image')->store('vehicle-images');
+        }
 
         Vehicle::where('id', $vehicle->id)
                 ->update($validatedData);
@@ -127,9 +137,13 @@ class DashboardVehicleController extends Controller
      */
     public function destroy(Vehicle $vehicle)
     {
+        if($vehicle->image) {
+            Storage::delete($vehicle->image);
+        }
+        
         Vehicle::destroy($vehicle->id);
 
-        return redirect('/dashboard/vehicles')->with('success', 'Kendaraan telah berhasil dihapus!');
+        return redirect('/dashboard/vehicles')->with('success', 'Kendaraan telah berhasil dibatalkan!');
     }
 
     public function checkSlug (Request $request)

@@ -14,8 +14,8 @@
               </div>
               <div class="col-lg-7 text-end position-relative">
                   <a href="/vehicles?start_date={{ session('start_date') }}&end_date={{ session('end_date') }}&search=vespa#search">
-                    <div class="card card-sale position-absolute rounded-5 border-0" style="height: 120px; width:120px; left:50px;
-                    background: var(--White, #FFF);">
+                    <div class="position-absolute"  id="iklan-vespa">
+                      <img src="{{ asset('img/thumb-vespa.png') }}" class="thumb-vespa img-fluid" alt="vespalove">
                     </div>
                   </a>
                   <img src="/img/home-hero-car.png" class="hero-car-img mt-4 img-fluid" alt="" style="max-height: 250px">
@@ -33,30 +33,13 @@
 {{-- Brand start --}}
 <div class="brand my-4 mx-2"">
     <div class="row mb-4">
-      <div class="col text-center">
-        <img src="/img/car-brand-1.png" alt="toyota" class="img-fluid" style="max-height: 50px">
-      </div>
-      <div class="col text-center">
-        <img src="/img/car-brand-1.png" alt="toyota" class="img-fluid" style="max-height: 50px">
-      </div>
-      <div class="col text-center">
-        <img src="/img/car-brand-1.png" alt="toyota" class="img-fluid" style="max-height: 50px">
-      </div>
-      <div class="col text-center">
-        <img src="/img/car-brand-1.png" alt="toyota" class="img-fluid" style="max-height: 50px">
-      </div>
-      <div class="col text-center">
-        <img src="/img/car-brand-1.png" alt="toyota" class="img-fluid" style="max-height: 50px">
-      </div>
-      <div class="col text-center">
-        <img src="/img/car-brand-1.png" alt="toyota" class="img-fluid" style="max-height: 50px">
-      </div>
-      <div class="col text-center">
-        <img src="/img/car-brand-1.png" alt="toyota" class="img-fluid" style="max-height: 50px">
-      </div>
-      <div class="col text-center">
-        <img src="/img/car-brand-1.png" alt="toyota" class="img-fluid" style="max-height: 50px">
-      </div>
+      @foreach ($brands as $brand)
+        @if($loop->index < 10)
+          <div class="col text-center my-auto">
+            <img src="/img/{{ $brand->slug }}.png" alt="{{ $brand->slug }}" class="img-fluid" style="max-height: 50px">
+          </div>
+        @endif
+      @endforeach
     </div>
 </div>
 {{-- Brand end --}}
@@ -64,9 +47,9 @@
 {{-- Catalog start --}}
 <div class="catalog my-4 mt-5">
   <div class="row">
-    <div class="col fw-bold fs-2" style="color: black; ">
+    <p class="col fw-bold fs-3" style="color: black; ">
       Katalog
-    </div>
+    </p>
     <div class="col text-end">
       <h2><a href="/catalog" style="color: #52B788; font-size: medium;">Lihat Semua</a></h2>
     </div>
@@ -77,9 +60,9 @@
       <div class="col-12 col-md-6 col-xl-3">
         <div class="card shadow-sm mb-3 bg-body rounded border-0 p-3" style="max-height: 300px;">
           <div class="containers">
-            <div class="row">
+            <div class="row g-0">
               <div class="col-11 fw-bold">{{ $vehicle->brand->name . ' ' . $vehicle->title }}</div>
-              <div class="col-1"><img src="Heart.png" style="cursor: pointer;"id="heart-G2"  alt=""></div>
+              <div class="col-1"></div>
             </div>
             <div class="row mb-3">
               @if ($vehicle->image)
@@ -96,17 +79,17 @@
             </div>
             <div class="row g-0 text-center d-flex justify-content-evenly" style="font-size: small;" >
               <div class="col d-flex align-items-center justify-content-center">
-                <span class="pt-"><i data-feather="sliders" class="feather-16"></i> {{ $vehicle->transmission->name }}</span>
+                <span class="" style="font-size: 10px"><i data-feather="sliders" class="feather-16 me-1"></i> {{ $vehicle->transmission->name }}</span>
               </div>
               <div class="col d-flex align-items-center justify-content-center">
-                <span class="pt-"><i data-feather="user" class="feather-16"></i> {{ $vehicle->capacity }} orang</span>
+                <span class="" style="font-size: 10px"><i data-feather="user" class="feather-16 me-1"></i> {{ $vehicle->capacity }} orang</span>
               </div>
               <div class="col d-flex align-items-center justify-content-center">
-                <span class="pt-"><i data-feather="battery-charging" class="feather-16"></i> {{ $vehicle->power }} cc</span>
+                <span class="" style="font-size: 10px"><i data-feather="battery-charging" class="feather-16 me-1"></i> {{ $vehicle->power }} cc</span>
               </div>
             </div>   
             <div class="row mt-3 g-0">
-              <div class="col text-end">
+              <div class="col text-end fweig-semibold ">
                 IDR {{ number_format($vehicle->price) }}/<span style="color: grey;">hari</span>
               </div>
             </div>      
@@ -114,73 +97,9 @@
         </div>
       </div>
     @endforeach
-    <!-- Akhir Kendaraan 1 -->
   </div>
 </div>
 {{-- Catalog end --}}
-
-    {{-- Catalog start --}}
-    {{-- <div class="container-fluid mb-5" id="catalog" style="padding: 0 10%" >
-        <h1 class="fw-bold fs-4">Katalog</h1>
-        <div class="row justify-between">
-          @foreach ($vehicles as $vehicle)
-          <div class="col-md-3 mb-3 position-relative">
-            <a href="/vehicles/{{ $vehicle["slug"] }}" class="text-decoration-none">
-              <div class="card py-4 px-1 shadow border-0" style="min-width: 300px; border-radius:10px;">
-                <div class="card-body">
-                  <div class="container text-center">
-                    <div class="row align-items-center justify-content-between">
-                      <div class="col-10 text-start">
-                        <h4 class="card-title text-dark fweig-medium">{{ $vehicle["title"] }}</h4>
-                      </div>
-                      <div class="col-2 text-end">
-                        <span class="material-symbols-outlined txt-ntrl300">
-                            favorite
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <img src="/img/stargizer.png" class="card-img-top mb-3" alt="...">
-                  <div class="container text-center mb-4 txt-ntrl500">
-                    <div class="row align-items-center">
-                      <div class="col d-flex align-items-center">
-                        <span class="material-symbols-outlined me-2">
-                            auto_transmission
-                        </span>
-                        <span style="font-size: 12px">{{ $vehicle["transmission"] }}</span>
-                      </div>
-                      <div class="col d-flex align-items-center">
-                        <span class="material-symbols-outlined me-2">
-                            person
-                        </span>
-                        <span style="font-size: 12px">{{ $vehicle["capacity"] }}</span>
-                      </div>
-                      <div class="col d-flex align-items-center">
-                        <span class="material-symbols-outlined me-2">
-                            speed
-                        </span>
-                        <span style="font-size: 12px">{{ $vehicle["power"] }} cc</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="container text-center">
-                    <div class="row align-items-center justify-content-between">
-                      <div class="col-6 text-start">
-                        <p class="my-auto fsize-4 fw-medium text-dark">Rp. {{ $vehicle["price"] }}/<span class="txt-ntrl500">hari</span></p>
-                      </div>
-                      <div class="col-4 text-end position-absolute" style="right: 29px">
-                        <a href="/rent" class="p-0 m-0"><button class="px-3 py-2 rounded bg-ter1 text-white border-0 fw-bold">Sewa</button></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-          @endforeach
-        </div>
-    </div> --}}
-    {{-- Catalog end --}}
 
 {{-- Benefits start --}}
 <div class="benefits d-flex justify-content-center">
@@ -300,45 +219,13 @@
 </div> --}}
 {{-- Benefits end --}}
 
-{{-- Steps start --}}
-{{-- <div class="container-fluid my-5 text-center" id="howTo">
-  <h1 class="fs-4 fw-bold mb-5">Cara Melakukan Pembayaran</h1>
-  <div class="row">
-    <div class="col-md-2">
-      <div class="card" style="border:0">
-        <div class="rounded-number rounded-circle bg-prim fw-bold fs-4 text-white mx-auto" style="width: 70px; height:70px; padding:20px 0">
-          <span>1</span>
-        </div>
-        <img src="..." class="card-img-top" alt="icon">
-        <div class="card-body">
-          <h5 class="card-title">Cari kendaraan</h5>
-          <p class="card-text">Mencari kendaraan yang ingin disewa</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3 d-flex justify-content-between">
-    </div>
-    <div class="col-md-2">
-      <div class="rounded-number rounded-circle bg-prim fw-bold fs-4 text-white mx-auto" style="width: 70px; height:70px; padding:20px 0">
-        <span>2</span>
-      </div>
-    </div>
-    <div class="col-md-3 m-auto">
-    </div>
-    <div class="col-md-2">
-      <div class="rounded-number rounded-circle bg-prim fw-bold fs-4 text-white mx-auto" style="width: 70px; height:70px; padding:20px 0">
-        <span>3</span>
-      </div>
-    </div>
-  </div>
-</div> --}}
 <!-- Cara Melakukan Penyewaan -->
-<p class="text-center mt-5 fw-bold fs-3 ">Cara Melakukan Penyewaan</p>
+<p class="text-center my-3 fw-bold fs-3 ">Cara Melakukan Penyewaan</p>
 <!-- Cara Melakukan Penyewaan -->
 
 <!-- Tutor Nyewa -->
-<div id="Tutor mb-5">
-  <div class="container pt-5 mt-4">
+<div id="Tutor mb-4">
+  <div class="container mt-4">
     <div class="row g-0" style="color: black;">
 
       <div class="col text-center">
@@ -352,10 +239,10 @@
         <p>Mencari <br>kendaraan yang <br> ingin disewa</p>
       </div>
       
-      <div class="col-md">
+      <div class="col-md" id="stepper">
         <div class="container">
-          <div class="row " style="margin-top: 150px;">
-              <div class="container p-2 align-items-center" id="stepper">
+          <div class="row " style="margin-top: 70px;">
+              <div class="container p-2 align-items-center">
                 <div class="d-flex justify-content-center" >
                   <button
                     class="rounded-circle border border-light mt-auto mb-auto"
@@ -391,10 +278,10 @@
         </div>
       </div>
 
-      <div class="col-md">
+      <div class="col-md" id="stepper">
         <div class="container">
-          <div class="row " style="margin-top: 150px;">
-              <div class="container p-2 align-items-center" id="stepper">
+          <div class="row " style="margin-top: 70px;">
+              <div class="container p-2 align-items-center">
                 <div class="d-flex justify-content-center" >
                   <button
                     class="rounded-circle border border-light mt-auto mb-auto"
@@ -436,5 +323,11 @@
 
 </div>
 {{-- Steps end --}}
+
+<script>
+  function heartToggle() {
+
+  }
+</script>
     
 @endsection

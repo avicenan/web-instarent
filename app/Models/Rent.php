@@ -15,6 +15,21 @@ class Rent extends Model
 
     public function scopeFilter($query, array $filters)
     {
+        $query->when($filters['search'] ?? false, function($query, $search) {
+            return $query->where('nama_lengkap', 'like', '%' . $search. '%')
+            ->orWhere('alamat', 'like', '%' . $search . '%')
+            ->orWhere('universitas', 'like', '%' . $search . '%')
+            ->orWhere('pekerjaan', 'like', '%' . $search . '%')
+            ->orWhere('jurusan', 'like', '%' . $search . '%')
+            ->orWhere('username_instagram', 'like', '%' . $search . '%')
+            ->orWhereHas('vehicle', function($query) use ($search) {
+                $query->where('title', 'like', '%' . $search . '%')
+                ->orWhereHas('brand', function($query) use ($search) {
+                    $query->where('name', 'like', '%' . $search . '%');
+                });
+            });
+        });
+        
         $query->when($filters['status'] ?? false, function($query, $status) {
             return $query->whereHas('status', function($query) use ($status) {
                 $query->where('slug', $status);
@@ -36,6 +51,16 @@ class Rent extends Model
     public function status()
     {
         return $this->belongsTo(Status::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function review()
+    {
+        return $this->hasOne(Review::class);
     }
 
 }

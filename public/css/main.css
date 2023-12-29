@@ -230,6 +230,35 @@ a {
     cursor: pointer;
 }
 
+/* Review Star */
+
+.star {
+    font-size: 32px;
+    cursor: pointer;
+}
+
+.one {
+    color: rgb(255, 255, 0);
+}
+
+.two {
+    color: rgb(255, 255, 0);
+}
+
+.three {
+    color: rgb(255, 255, 0);
+}
+
+.four {
+    color: rgb(255, 255, 0);
+}
+
+.five {
+    color: rgb(255, 255, 0);
+}
+
+/* Review End */
+
 /* Custom */
 
 @media (max-width: 1000px) {
@@ -252,6 +281,10 @@ a {
     }
 
     .hero-car-img {
+        display: none;
+    }
+
+    .thumb-vespa {
         display: none;
     }
 
@@ -280,5 +313,17 @@ a {
 @media (max-width: 770px) {
     #reserve-banner {
         display: none;
+    }
+}
+
+@media all and (min-width: 992px) {
+    .navbar .nav-item .dropdown-menu {
+        display: none;
+    }
+    .navbar .nav-item:hover .dropdown-menu {
+        display: block;
+    }
+    .navbar .nav-item .dropdown-menu {
+        margin-top: 0;
     }
 }

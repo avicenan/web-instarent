@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Vehicle;
 use App\Models\Brand;
+use App\Models\Rent;
 use App\Http\Requests\StoreVehicleRequest;
 use App\Http\Requests\UpdateVehicleRequest;
 use Illuminate\Http\Request;
@@ -46,6 +47,7 @@ class VehicleController extends Controller
             "transmissions" => Transmission::all(),
             "today" => Carbon::today(7),
             "tommorow" => Carbon::tomorrow(7),
+            "rents" => Rent::all(),
             "start_date" => $start_date,
             "end_date" => $end_date,
             "duration" => [
@@ -55,16 +57,28 @@ class VehicleController extends Controller
     }
     public function show(Vehicle $vehicle, Request $request)
     {   
-        
+        if($request->start_date && $request->end_date) {
+            session(['start_date' => $request->start_date]);
+            session(['end_date' => $request->end_date]);
+        }
+
         $start_date = new Carbon(session('start_date'));
         $end_date = new Carbon(session('end_date'));
 
+        $date = array(
+            "start_date" => session('start_date'),
+            "end_date" => session('end_date')
+          );
+
         return view('vehicle', [
             "title" => "Vehicle Details",
+            "rents" => Rent::all(),
             "vehicle" => $vehicle,
-            "vehicles" => Vehicle::all()->filter(session(['start_date', 'end_date'])),
+            "vehicles" => Vehicle::latest()->filter($date)->get(),
             "start_date" => $start_date,
             "end_date" => $end_date,
+            "today" => Carbon::today(7),
+            "tommorow" => Carbon::tomorrow(7),
             "duration" => [
                 "day" => $end_date->day - $start_date->day
             ],

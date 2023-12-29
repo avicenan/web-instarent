@@ -13,8 +13,8 @@
     @csrf
 
     {{-- Hidden Input --}}
-    <input type="number" name="status_id" id="status_id" value="{{ $status_id->id }}" hidden>
-    <input type="number" name="total_price" id="total_price" value="{{ $total_price }}" hidden>
+    <input type="hidden" name="status_id" id="status_id" value="{{ $status_id->id }}" hidden>
+    <input type="hidden" name="total_price" id="total_price" value="{{ $total_price }}" hidden>
     
     <div class="terms-conditions my-3 mt-4 bg-white shadow-sm p-5 rounded-3" id="terms-conditions">
         <h5 class="fweig-bold fsize-7" id="step-title">Syarat dan Ketentuan</h5>

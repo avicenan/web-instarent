@@ -20,12 +20,12 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="banner-section col-lg-4 bg-prim vh-100 position-relative">
-                <div class="container p-5">
+            <div class="banner-section col-lg-4 bg-prim position-relative" style="height: 100%">
+                <div class="container p-3" style="height: 100%">
                     <div class="row">
                         <div class="col-md-12" style="z-index:3;">
-                            <h1 class="fs-4 fw-semibold text-white text-center mb-5">Bersama Kendaraan Impianmu, Mulailah Berpetualang Dengan InstaRent!</h1>
-                            <img class="mb-5 img-fluid my-5" src="/img/entry-hero-vehicle.png" alt="">
+                            <h1 class="fs-4 fw-semibold text-white text-center mb-3">Bersama Kendaraan Impianmu, Mulailah Berpetualang Dengan InstaRent!</h1>
+                            <img class="mb-3 img-fluid my-5" src="/img/entry-hero-vehicle.png" alt="">
                             <h1 class="fs-4 fw-semibold text-white text-start mt-5">#OnTheGoWithInstaRent</h1>
                         </div>
                         <div class="col-md-12 inner-ellip position-absolute" style="width: 479px;
@@ -33,13 +33,7 @@
                             flex-shrink: 0; border-radius: 485px;
                             background: linear-gradient(325deg, rgba(255, 213, 62, 0.50) 0.74%, rgba(82, 183, 136, 0.50) 46.34%, rgba(255, 170, 234, 0.50) 100%);
                             box-shadow: 0px 24px 96px 0px rgba(1, 11, 64, 0.12);
-                            filter: blur(10px); top:25%; right:10%; z-index:2;">
-                        </div>
-                        <div class="col-md-12 ellips position-absolute" style="width: 519px;
-                            height: 584px;
-                            flex-shrink: 0; border-radius: 584px;
-                            background: rgba(255, 247, 94, 0.60);
-                            filter: blur(127px); z-index:1">
+                            filter: blur(10px); top:25%; right:5%; z-index:2;">
                         </div>
                     </div>
                 </div>

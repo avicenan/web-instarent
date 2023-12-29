@@ -72,7 +72,12 @@ class Vehicle extends Model
         return $this->belongsTo(Transmission::class);
     }
 
-    public function rents()
+    public function rent()
+    {
+        return $this->hasMany(Rent::class);
+    }
+
+    public function favorite()
     {
         return $this->hasMany(Rent::class);
     }

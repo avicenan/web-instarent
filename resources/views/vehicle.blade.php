@@ -23,10 +23,34 @@
                     </div>
                   </div>
                   <div class="row card-text align-items-center" id="edit-date-range" hidden>
-                    <div class="col d-flex">
-                        <p>edit here</p>
+                    <div class="col-10">
+                        <form action="/vehicles/{{ $vehicle->slug }}" method="post">
+                            @method('put')
+                            @csrf
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <div class="form-floating mb-1">
+                                        <input type="datetime-local" min="{{ $today }}" max="{{ $end_date }}" class="form-control" id="start_date" name="start_date" value="{{ $start_date }}" required>
+                                        <label for="start_date">Tanggal Sewa</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-floating mb-1">
+                                        <input type="datetime-local" min="{{ $start_date }}" class="form-control" id="end_date" name="end_date" value="{{ $end_date }}" required>
+                                        <label for="end_date">Tanggal Kembali</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <p class="text-secondary fweig-reg ms-2">{{ $start_date->toDayDateTimeString() }}</p>
+                                  </div>
+                                  <div class="col-6">
+                                    <p class="text-secondary fweig-reg ms-2">{{ $end_date->toDayDateTimeString() }}</p>
+                                  </div>
+                            </div>
+                            <button type="submit" class="btn btn-warning btn-sm">Simpan</button>
+                        </form>
                     </div>
-                    <div class="col text-end">
+                    <div class="col-2 text-end">
                         <a href="#" id="exit-date-toggle" class="text-dark text-decoration-none p-2"><i data-feather="x"></i></a>
                     </div>
                   </div>
@@ -36,7 +60,9 @@
     </div>
 {{-- Search Bar end --}}
 
-<div class="card p-4 mb-3 border-0 shadow-sm">
+@if (count($vehicles->where('id', $vehicle->id))>0)
+
+<div class="card rounded-4 p-4 mb-3 border-0 shadow-sm">
     <div class="row mb-4">
         
         {{-- Image start --}}
@@ -116,7 +142,7 @@
             </li>
         </ul> --}}
         <div class="col">
-            <div class="card";">
+            <div class="card rounded-4 border-0 shadow-sm">
                 <div class="card-body">
                   <h5 class="card-title mb-3 fweig-bold ">Rincian harga</h5>
                   <div class="row">
@@ -147,13 +173,47 @@
 
     <div class="row mb-4">
         <div class="col">
-            <div class="card"">
+            <div class="card border-0 rounded-4 shadow-sm">
                 <div class="card-body" id="reviews">
-                  <h5 class="card-title fweig-bold mb-3">Ulasan</h5>
-                  <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="card-link">Card link</a>
-                  <a href="#" class="card-link">Another link</a>
+                    <h5 class="card-title fweig-bold mb-3">Ulasan</h5>
+                    @foreach($vehicle->rent as $rent)
+                    <div class="row g-2">
+                        <div class="col-3">
+                            <div class="card rounded-4 border-0 shadow-sm bg-warning">
+                                <div class="card-body d-flex justify-content-center align-items-center" style="height: 100px">
+                                    @if ($rent->review)
+                                    <div class="text-dark fsize-12">{{ number_format($rent->review->sum('rating'), 1) }}</div><br>
+                                    @else
+                                    <div class="text-dark fsize-12">.</div><br>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            @if ($rent->review)
+                            <div class="card rounded-4 border-0 shadow mb-2">
+                                <div class="card-body p-3 ">
+                                        <div class="mb-2"><img src="{{ asset('img/no-image.png') }}" class="rounded-circle me-2 ms-0" alt="" style="height: 24px; width: 24px;"><span class="fweig-semibold ms-2">{{ $rent->user->fname . ' ' . $rent->user->lname }}</span>
+                                            <span class="ms-3">
+                                                @for($i=0; $i < $rent->review->rating; $i++)
+                                                    <span
+                                                        class="star text-warning" style="font-size: 16px">★
+                                                    </span>
+                                                @endfor
+                                                @for($i=0; $i < 5-$rent->review->rating; $i++)
+                                                    <span
+                                                        class="star" style="font-size: 16px">★
+                                                    </span>
+                                                @endfor
+                                            </span>
+                                        </div>
+                                        <q class="fsize-3 ms-2" style="font-weight: 300">{{ $rent->review->review }}</q>
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -232,6 +292,9 @@
 {{-- Other Vehicle end --}}
     </div>
 </div>
+@else
+<h4 class="fsize-4 text-center">Mohon maaf kendaraan belum tersedia untuk tanggal yang ditentukan.</h4>
+@endif
 
 <script>
 

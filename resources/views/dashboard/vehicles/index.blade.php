@@ -16,14 +16,14 @@
     <table class="table table-striped table-sm">
       <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">Nama Kendaraan</th>
-          <th scope="col">Plat Nomor</th>
-          <th scope="col">Brand</th>
-          <th scope="col">Tipe</th>
-          <th scope="col">Warna</th>
-          <th scope="col">Harga</th>
-          <th scope="col">Action</th>
+          <th scope="col" class="fsize-2">#</th>
+          <th scope="col" class="fsize-2">Nama Kendaraan</th>
+          <th scope="col" class="fsize-2">Plat Nomor</th>
+          <th scope="col" class="fsize-2">Brand</th>
+          <th scope="col" class="fsize-2">Tipe</th>
+          <th scope="col" class="fsize-2">Warna</th>
+          <th scope="col" class="fsize-2">Harga</th>
+          <th scope="col" class="fsize-2">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -42,7 +42,7 @@
                 <form action="/dashboard/vehicles/{{ $vehicle->slug }}" method="post" class="d-inline">
                   @method('delete')
                   @csrf
-                  <button class="badge bg-danger border-0"  onclick="return confirm('Are you sure?')"><i data-feather="x-circle"></i></button>
+                  <button class="badge bg-neutral500 border-0"  onclick="return confirm('Are you sure?')"><i data-feather="x-circle"></i></button>
                 </form>
             </td>
         </tr>

@@ -136,7 +136,7 @@
                     @if ($rent->status_id == 1)
                         <button type="button" class="btn btn-success" id="pay-button">Bayar Sekarang</button>
                     @else
-                        <a href="/" class="btn btn-outline-success">Ke Halaman Utama</a>
+                        <a href="/" class="btn btn-outline-success btn-sm">Ke Halaman Utama</a>
                         <a href="/profile" class="btn btn-success">Lihat Detail Reservasi</a>
                     @endif
                 </div>

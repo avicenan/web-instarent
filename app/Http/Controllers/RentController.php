@@ -7,6 +7,7 @@ use App\Models\Status;
 use App\Http\Requests\StoreRentRequest;
 use App\Http\Requests\UpdateRentRequest;
 use App\Http\Controllers\Requests;
+use App\Http\Controllers\Config;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Vehicle;
@@ -116,14 +117,14 @@ class RentController extends Controller
             'user_id' => 'required',
             'nama_lengkap' => 'required',
             'alamat' => 'required',
-            'telp_num' => 'required',
-            'sec_contact' => 'required',
+            'telp_num' => 'required|max:15',
+            'sec_contact' => 'required|max:15',
             'username_instagram' => 'required',
             'pekerjaan' => 'required',
             'universitas' => 'required',
-            'nim' => 'required',
+            'nim' => 'required|max:15',
             'jurusan' => 'required',
-            'id_line' => 'max:12',
+            'id_line' => 'max:15',
             'angkatan' => 'required',
             'kelas' => 'required' 
         ]);
@@ -188,6 +189,7 @@ class RentController extends Controller
 
         $rent = $request->session()->get('rent');
         $rent->fill($validatedData);
+        $rent->save();
         // $rent = array_merge($rent, $validatedData);
         // $request->session()->put('rent', $rent);
   
@@ -242,6 +244,7 @@ class RentController extends Controller
         \Midtrans\Config::$isSanitized = true;
         // Set 3DS transaction for credit card to true
         \Midtrans\Config::$is3ds = true;
+        \Midtrans\Config::$overrideNotifUrl = "/rented";
 
         $params = array(
             'transaction_details' => array(
@@ -260,8 +263,6 @@ class RentController extends Controller
         $rent->fill($validatedData);
 
         $rent->save();
-  
-        // $request->session()->forget('rent');
   
         return redirect()->route('rent.create.checkout');
     }
@@ -293,9 +294,11 @@ class RentController extends Controller
     {   
         $rent = $request->session()->get('rent');
 
-        $rent->status_id = 2;
-        $rent->save();
-        $rent->forget();
+        if ($rent) {
+            $rent->status_id = 2;
+            $rent->save();
+        }
+        $request->session()->forget('rent');
 
         // if (empty($rent->status_id && $rent->total_price)) {
         //     $rent->status_id = $status_id[1];
@@ -304,23 +307,8 @@ class RentController extends Controller
         //     $rent->status_id = $rent->status_id;
         //     $rent->total_price =$rent->total_price;
         // }
-
-        $start_date = new Carbon($rent->start_date);
-        $end_date = new Carbon($rent->end_date);
   
-        return view('rent.create-checkout', [
-            'title' => 'Sewa - Checkout',
-            'user' => Auth::user(),
-            'vehicle' => session('vehicle'),
-            'status' => Status::findOrFail($rent->status_id),
-            'start_date' => $start_date,
-            'end_date' => $end_date,
-            'duration' => session('duration')['day'],
-            'rent_price' => (session('duration')['day'])*(session('vehicle')->price),
-            'rent_fees' => session('rent_fees'),
-            'total_price' => session('rent_fees') + ((session('duration')['day'])*(session('vehicle')->price)),
-            'rent' => $rent
-        ]);
+        return redirect('/rent/success')->with('success', 'Sewa berhasil dibuat!');
     }
 
     public function cancel(Request $request)
