@@ -59,31 +59,12 @@
     </div>
 </div>
 
-{{-- <div class="my-3">
-    <a href="/vehicles/{{ $vehicle->slug }}" class="fweig-medium text-danger" onclick="return confirm('apakah ingin membatalkan penyewaan?')"><i data-feather="arrow-left"></i> Batalkan</a>
-</div> --}}
-
-{{-- <form action="/rent" method="POST">
-    <input type="text" disabled value="{{ $vehicle->title }}">
-    <input type="datetime-local" disabled value="{{ $start_date }}">
-    <input type="datetime-local" disabled value="{{ $end_date }}">
-</form> --}}
-
 
 <form action="{{ route('rent.create.step.one.post') }}" method="POST">
     @csrf
     
     <div class="shadow-sm personal-data my-3 mt-4 p-3 rounded-3 bg-white">
         <h5 class="fweig-bold fsize-7">Data Diri</h5>
-        {{-- @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif --}}
         <div class="row g-4 my-3">
             <div class="col-6" hidden>
                 <label for="user_id">User</label>
