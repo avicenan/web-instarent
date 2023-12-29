@@ -314,6 +314,10 @@ a {
     #reserve-banner {
         display: none;
     }
+
+    #brand-logo {
+        display: none;
+    }
 }
 
 @media all and (min-width: 992px) {

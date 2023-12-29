@@ -3,7 +3,7 @@
     <ul class="nav flex-column">
       <li class="mx-3 mt-4 mb-2 sidebar-heading">MENU</li>
       <li class="nav-item">
-        <a class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}" aria-current="page" href="/dashboard">
+        <a class="nav-link {{ Request::is('dashboard/home') ? 'active' : '' }}" aria-current="page" href="/dashboard/home">
           <i data-feather="home"></i>
           Dashboard
         </a>
@@ -22,7 +22,7 @@
       </li>
       <li class="mx-3 mt-4 mb-2 sidebar-heading" >LAINNYA</li>
       <li class="nav-item">
-        <a class="nav-link {{ Request::is('dashboard/account') ? 'active' : '' }}" href="/dashboard/profile">
+        <a class="nav-link {{ Request::is('dashboard/account') ? 'active' : '' }}" href="/profile">
           <i data-feather="user"></i>
           Akun
         </a>

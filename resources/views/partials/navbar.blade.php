@@ -41,7 +41,7 @@
               @auth
               @if (auth()->user()->usertype == 'admin')
               <li>
-                <a class="dropdown-item {{ Request::is('dashboard') ? 'active' : '' }}" href="/dashboard"><i data-feather="tool" class="feather-16 me-3"></i> Admin Menu</a>
+                <a class="dropdown-item {{ Request::is('dashboard/home') ? 'active' : '' }}" href="/dashboard/home"><i data-feather="tool" class="feather-16 me-3"></i> Admin Menu</a>
               </li>
               <li><hr class="dropdown-divider"></li>
               @endif

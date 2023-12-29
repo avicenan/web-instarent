@@ -2,13 +2,6 @@
     
 @section('rent-container')
 
-{{-- <form action="/rent" method="POST">
-    <input type="text" disabled value="{{ $vehicle->title }}">
-    <input type="datetime-local" disabled value="{{ $start_date }}">
-    <input type="datetime-local" disabled value="{{ $end_date }}">
-</form> --}}
-
-
 <form action="{{ route('rent.create.step.three.post') }}" method="POST" enctype="multipart/form-data">
     @csrf
 
@@ -80,7 +73,5 @@
         </div>
     </div>
 </form>
-
-{{ $rent }}
 
 @endsection

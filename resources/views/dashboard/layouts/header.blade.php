@@ -1,6 +1,6 @@
 <header class="navbar navbar-light sticky-top bg-light flex-md-nowrap p-2 shadow-sm">
   <img src="../../img/instarent-logo.png" class="float-start ms-2" alt="" width="35px">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 bg-light" href="#" style="font-family: Pattaya">Instarent</a>
+  <span class="ms-2 px-3 bg-light justify-content-start" href="#" style="font-family: Pattaya" id="brand-logo">Instarent</span>
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -18,7 +18,7 @@
         <li><a class="dropdown-item" href="/profile"><i data-feather="user"></i> Profile</a></li>
         <li><hr class="dropdown-divider"></li>
         <li>
-          <a class="dropdown-item" href="/"/><i data-feather="home"></i> User Home</a>
+          <a class="dropdown-item" href="/"/><i data-feather="home"></i> Customer Home</a>
         </li>
       </ul>
     </li>

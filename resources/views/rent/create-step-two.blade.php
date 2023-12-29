@@ -2,12 +2,6 @@
     
 @section('rent-container')
 
-{{-- <form action="/rent" method="POST">
-    <input type="text" disabled value="{{ $vehicle->title }}">
-    <input type="datetime-local" disabled value="{{ $start_date }}">
-    <input type="datetime-local" disabled value="{{ $end_date }}">
-</form> --}}
-
 <div class="row justify-content-center">
     <div class="col-8">
         <div class="progress-bar" style="padding: 30px">
@@ -180,8 +174,6 @@
         </div>
     </div>
 </form>
-
-{{ $user }}
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" id="vehicleModal">

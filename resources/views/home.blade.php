@@ -51,7 +51,7 @@
       Katalog
     </p>
     <div class="col text-end">
-      <h2><a href="/catalog" style="color: #52B788; font-size: medium;">Lihat Semua</a></h2>
+      <h2><a href="/vehicles" style="color: #52B788; font-size: medium;">Lihat Semua</a></h2>
     </div>
   </div>
 

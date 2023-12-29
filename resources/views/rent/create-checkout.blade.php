@@ -148,11 +148,6 @@
 @endsection
 
 @section('scripts')
-{{-- <script>
-    document.getElementById('pay-button').onclick = function(){
-        alert('tesss');
-    };
-</script> --}}
 <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="<Set your ClientKey here>"></script>
     <script type="text/javascript">
       document.getElementById('pay-button').onclick = function(){

@@ -13,7 +13,7 @@
                 <h3>{{ $user->fname . ' ' . $user->lname }}</h3>
                 <form>
                     <div class="row d-flex align-items-center">
-                        <div class="col-lg-2 my-3 text-center">
+                        <div class="col my-3 text-center">
                               <img src="{{ asset('storage/' . $user->image) }}" style="width: 200px; height:200px; object-fit:cover" class="img-fluid rounded-circle" >   
                         </div>
                       </div>   

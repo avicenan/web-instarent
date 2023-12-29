@@ -12,7 +12,7 @@ use Carbon\Carbon;
 
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardHomeController;
 use App\Http\Controllers\DashboardVehicleController;
 use App\Http\Controllers\DashboardRentController;
 use Illuminate\Support\Facades\Auth;
@@ -83,10 +83,6 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::post('/cancel', [RentController::class, 'cancel']);
 
-Route::get('/dashboard', function() {
-    return view('dashboard.index');
-})->middleware('auth');
-
 Route::get('/vehicles', [VehicleController::class, 'index']);
 
 Route::get('/vehicles/{vehicle:slug}', [VehicleController::class, 'show']);
@@ -116,7 +112,7 @@ Route::post('/rent', [RentController::class, 'store']);
 
 Route::get('/dashboard/vehicles/checkSlug', [DashboardVehicleController::class, 'checkSlug'])->middleware('auth');
 
-Route::resource('/dashboard', DashboardController::class)->middleware('auth')->middleware('admin');
+Route::resource('/dashboard/home', DashboardHomeController::class)->middleware('auth')->middleware('admin');
 
 Route::resource('/dashboard/vehicles', DashboardVehicleController::class)->middleware('auth')->middleware('admin');
 
