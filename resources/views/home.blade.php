@@ -34,7 +34,7 @@
 <div class="brand my-4 mx-2"">
     <div class="row mb-4">
       @foreach ($brands as $brand)
-        @if($loop->index < 10)
+        @if($loop->index < 6)
           <div class="col text-center my-auto">
             <img src="/img/{{ $brand->slug }}.png" alt="{{ $brand->slug }}" class="img-fluid" style="max-height: 50px">
           </div>

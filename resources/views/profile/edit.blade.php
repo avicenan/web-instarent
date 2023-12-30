@@ -53,7 +53,7 @@
                         <div class="col-md-6">
                             <label class="small mb-2 fsize-2" for="password">Password</label>
                             <div class="input-group position-relative">
-                                <input class="form-control fsize-3 px-3" id="password" name="password" type="password" placeholder="*********" value="">
+                                <input class="form-control fsize-3 px-3" id="password" name="password" type="password" placeholder="*********" value="" disabled>
                             </div>
                         </div>
                     </div>

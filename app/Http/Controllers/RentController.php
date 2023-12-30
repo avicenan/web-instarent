@@ -308,7 +308,7 @@ class RentController extends Controller
         //     $rent->total_price =$rent->total_price;
         // }
   
-        return redirect('/rent/success')->with('success', 'Sewa berhasil dibuat!');
+        return redirect('/rented')->with('success', 'Sewa berhasil dibuat!');
     }
 
     public function cancel(Request $request)

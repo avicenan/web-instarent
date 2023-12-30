@@ -29,7 +29,6 @@ class UsersController extends Controller
             'fname' => 'required|max:255',
             'lname' => 'required|max:255',
             'username' => 'required|max:255',
-            'password' => 'required|min:8|max:255',
             'telpNum' => 'required|numeric',
             'image' => 'image|file|max:5120'
         ];

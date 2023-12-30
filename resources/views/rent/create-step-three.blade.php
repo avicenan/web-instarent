@@ -23,7 +23,6 @@
         <div class="row my-3">
             <div class="col">
                 <h5>Peraturan</h5>
-                <p>{{ $status_id }}</p>
                 <pre>
     1.  Memiliki KTM/KTP/SIM ( Mahasiswa Aktif ) " Alumni : Foto Ijazah, Surat Kelulusan
     2.  Syarat Konsumen Umum : Memiliki Identitas Seperti : KTP, SIM, KK, SKCK, NPWP, ID Card Perusahaan Bekerja (Wajib)

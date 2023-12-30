@@ -99,7 +99,7 @@
         <tbody>
           @foreach ($rents as $rent)
           <tr>
-              @if ($rents->vehicle->image)
+              @if ($rent->vehicle->image)
                 <td class="align-middle"> <img src="{{ asset('storage/'.$rent->vehicle->image) }}" class="img-fluid" style="max-height: 60px" alt=""></td>
               @else
                 <td class="align-middle"><img src="{{ asset('img/no-image.png') }}" class="img-fluid" style="max-height: 60px" alt=""></td>
@@ -125,7 +125,7 @@
         <tbody>
           @foreach ($rents->where('status_id', 2) as $rent)
           <tr>
-              @if ($rents->vehicle->image)
+              @if ($rent->vehicle->image)
                 <td class="align-middle"> <img src="{{ asset('storage/'.$rent->vehicle->image) }}" class="img-fluid" style="max-height: 60px" alt=""></td>
               @else
                 <td class="align-middle"><img src="{{ asset('img/no-image.png') }}" class="img-fluid" style="max-height: 60px" alt=""></td>

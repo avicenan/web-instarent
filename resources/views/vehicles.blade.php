@@ -228,11 +228,11 @@
                     @if ($rent->review)
                     <span class="text-dark fweig-semibold" >{{ number_format($rent->review->sum('rating'), 1) }}</span>
                     @else
-                    <span class="text-dark fweig-semibold">.</span>
+                    <span class="text-dark fweig-semibold">4.5</span>
                     @endif
                   @endforeach
                 @else
-                  <span class="text-dark fweig-semibold">.</span>
+                  <span class="text-dark fweig-semibold">4.5</span>
                 @endif
               </div>
             </a>
